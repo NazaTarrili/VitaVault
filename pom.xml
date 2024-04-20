@@ -8,10 +8,10 @@
         <version>3.2.4</version>
         <relativePath /><!-- lookup parent from repository -->
     </parent>
-    <groupId>com.sigis</groupId>
-    <artifactId>sigis</artifactId>
-    <version>v3</version>
-    <name>sigis</name>
+    <groupId>com.vitavault</groupId>
+    <artifactId>VitaVault</artifactId>
+    <version>v1.0</version>
+    <name>VitaVault</name>
 
     <properties>
         <java.version>21</java.version>
