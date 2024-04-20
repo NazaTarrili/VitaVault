@@ -1,0 +1,62 @@
+#Database config
+spring.datasource.url=${JDBC_DATABASE_URL\:jdbc\:mysql\://localhost\:3306/sigis?serverTimezone\=UTC&createDatabaseIfNotExist=true}
+spring.datasource.username=${JDBC_DATABASE_USERNAME\:<<YOUR_DATABASE_USERNAME>>}
+spring.datasource.password=${JDBC_DATABASE_PASSWORD\:<<YOUR_DATABASE_PASSWORD>>\}
+spring.datasource.dbcp2.max-wait-millis=30000
+spring.datasource.dbcp2.validation-query=/* ping */ select 1
+spring.datasource.dbcp2.validation-query-timeout=30
+
+#JPA config
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.open-in-view=false
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.properties.hibernate.id.new_generator_mappings=true
+spring.jpa.properties.hibernate.type.preferred_uuid_jdbc_type=CHAR
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.MySQL8Dialect
+
+#Error handlers config
+error.handling.http-status-in-json-response=true
+error.handling.exception-logging=NO_LOGGING
+error.handling.full-stacktrace-http-statuses=5xx
+error.handling.log-levels.5xx=ERROR
+error.handling.codes.CountryNameUnique=COUNTRY_NAME_UNIQUE
+error.handling.codes.StateNameUnique=STATE_NAME_UNIQUE
+error.handling.codes.CityNameUnique=CITY_NAME_UNIQUE
+error.handling.codes.BankNameUnique=BANK_NAME_UNIQUE
+error.handling.codes.BillingDetailAccountNumberUnique=BILLING_DETAIL_ACCOUNT_NUMBER_UNIQUE
+error.handling.codes.BillingDetailIbanUnique=BILLING_DETAIL_IBAN_UNIQUE
+error.handling.codes.BillingDetailPersonUnique=BILLING_DETAIL_PERSON_UNIQUE
+error.handling.codes.BillingDetailAddressUnique=BILLING_DETAIL_ADDRESS_UNIQUE
+error.handling.codes.PersonNameUnique=PERSON_NAME_UNIQUE
+error.handling.codes.StreetNameUnique=STREET_NAME_UNIQUE
+error.handling.codes.PeriodicityNameUnique=PERIODICITY_NAME_UNIQUE
+error.handling.codes.DocumentTypeNameUnique=DOCUMENT_TYPE_NAME_UNIQUE
+error.handling.codes.SpecialtyNameUnique=SPECIALTY_NAME_UNIQUE
+error.handling.codes.SubscriptionStatusNameUnique=SUBSCRIPTION_STATUS_NAME_UNIQUE
+error.handling.codes.SubscriptionPlanNameUnique=SUBSCRIPTION_PLAN_NAME_UNIQUE
+error.handling.codes.DeliveryNoteTypeNameUnique=DELIVERY_NOTE_TYPE_NAME_UNIQUE
+error.handling.codes.CenterNameUnique=CENTER_NAME_UNIQUE
+error.handling.codes.CenterAddressUnique=CENTER_ADDRESS_UNIQUE
+error.handling.codes.CenterBillingDetailUnique=CENTER_BILLING_DETAIL_UNIQUE
+error.handling.codes.CenterTypeNameUnique=CENTER_TYPE_NAME_UNIQUE
+error.handling.codes.RoleNameUnique=ROLE_NAME_UNIQUE
+error.handling.codes.SocialWorkNameUnique=SOCIAL_WORK_NAME_UNIQUE
+error.handling.codes.SocialWorkAddressUnique=SOCIAL_WORK_ADDRESS_UNIQUE
+error.handling.codes.SupplyTypeNameUnique=SUPPLY_TYPE_NAME_UNIQUE
+error.handling.codes.RoomTypeNameUnique=ROOM_TYPE_NAME_UNIQUE
+error.handling.codes.BedNameUnique=BED_NAME_UNIQUE
+error.handling.codes.BedStatusNameUnique=BED_STATUS_NAME_UNIQUE
+error.handling.codes.UserPersonUnique=USER_PERSON_UNIQUE
+error.handling.codes.SupplierNameUnique=SUPPLIER_NAME_UNIQUE
+error.handling.codes.SupplierAddressUnique=SUPPLIER_ADDRESS_UNIQUE
+error.handling.codes.RoomNameUnique=ROOM_NAME_UNIQUE
+error.handling.codes.TreatmentNameUnique=TREATMENT_NAME_UNIQUE
+error.handling.codes.DetailStatusNameUnique=DETAIL_STATUS_NAME_UNIQUE
+error.handling.codes.SupplyNameUnique=SUPPLY_NAME_UNIQUE
+error.handling.codes.EpisodeNameUnique=EPISODE_NAME_UNIQUE
+error.handling.codes.EpisodeTypeNameUnique=EPISODE_TYPE_NAME_UNIQUE
+error.handling.codes.PlanNameUnique=PLAN_NAME_UNIQUE
+error.handling.codes.PatientPersonUnique=PATIENT_PERSON_UNIQUE
+
+#Documentation config
+springdoc.pathsToMatch=/api/**

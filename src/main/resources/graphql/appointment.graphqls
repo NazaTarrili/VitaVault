@@ -1,0 +1,25 @@
+type Appointment {
+    id: ID
+    date: String
+    finished: Boolean
+    schedule: String
+    patient: String
+}
+
+input InputAppointment {
+    date: String!
+    finished: Boolean!
+    schedule: String!
+    patient: String!
+}
+
+type QueryAppointment {
+    getAll: [Appointment]
+    getByID(id: ID!): Appointment
+}
+
+type MutationAppointment {
+    create(input: InputAppointment!): Boolean
+    update(id: ID!, input: InputAppointment!): Boolean
+    delete(id: ID!): Boolean
+}

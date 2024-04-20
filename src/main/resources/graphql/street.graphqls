@@ -1,0 +1,19 @@
+type Street {
+    id: ID
+    name:String
+}
+
+input InputStreet {
+    name:String!
+}
+
+type QueryStreet {
+    getAll: [Street]
+    getByID(id: ID!): Street
+}
+
+type MutationStreet {
+    create(input: InputStreet!): Boolean
+    update(id: ID!, input: InputStreet!): Boolean
+    delete(id: ID!): Boolean
+}

@@ -1,0 +1,30 @@
+type Address {
+    id: ID
+    number: Int
+    floor: String
+    department: String
+    street: Street
+    city: String
+}
+
+input InputAddress {
+    number: Int!
+    floor: String
+    department: String
+    street: String!
+    city: String!
+}
+
+type QueryAddress{
+    getAll: [Address]
+    getByID(id: ID!): Address
+    create(input: InputAddress!): Boolean
+    update(id: ID!, input: InputAddress!): Boolean
+    delete(id: ID!): Boolean
+}
+
+type MutationAddress {
+    create(input: InputAddress!): Boolean
+    update(id: ID!, input: InputAddress!): Boolean
+    delete(id: ID!): Boolean
+}
