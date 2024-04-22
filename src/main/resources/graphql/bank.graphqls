@@ -1,0 +1,19 @@
+type Bank {
+    id: ID
+    name: String
+}
+
+input InputBank {
+    name: String!
+}
+
+type QueryBank {
+    getAll: [Bank]
+    getByID(id: ID!): Bank
+}
+
+type MutationBank {
+    create(input: InputBank!): Boolean
+    update(id: ID!, input: InputBank!): Boolean
+    delete(id: ID!): Boolean
+}

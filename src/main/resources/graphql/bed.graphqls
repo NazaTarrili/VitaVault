@@ -1,0 +1,23 @@
+type Bed {
+    id: ID
+    name: String
+    bedStatus: BedStatus
+    room: Room
+}
+
+input InputBed {
+    name: String!
+    bedStatus: ID!
+    room: ID!
+}
+
+type QueryBed {
+    getAll: [Bed]
+    getByID(id: ID!): Bed
+}
+
+type MutationBed {
+    create(input: InputBed!): Boolean
+    update(id: ID!, input: InputBed!): Boolean
+    delete(id: ID!): Boolean
+}

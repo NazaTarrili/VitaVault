@@ -1,0 +1,37 @@
+type Center {
+    id: ID
+    name: String
+    phoneNumber: String
+    email: String
+    subscriptionStart: String
+    subscriptionEnd: String
+    address: Address
+    subscriptionStatus: SubscriptionStatus
+    centerType: CenterType
+    billingDetail: BillingDetail
+    users: [User]
+    rooms: [Room]
+}
+
+input InputCenter {
+    name: String!
+    phoneNumber: String!
+    email: String!
+    subscriptionStart: String
+    subscriptionEnd: String
+    address: ID!
+    subscriptionStatus: ID!
+    centerType: ID!
+    billingDetail: ID!
+}
+
+type QueryCenter {
+    getAll: [Center]
+    getByID(id: ID!): Center
+}
+
+type MutationCenter {
+    create(input: InputCenter!): Boolean
+    update(id: ID!, input: InputCenter!): Boolean
+    delete(id: ID!): Boolean
+}

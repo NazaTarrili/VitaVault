@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 
-interface IBaseController<E extends BaseEntity> {
+public interface IBaseController<E extends BaseEntity> {
     ResponseEntity<?> create(@RequestBody E entity);
     ResponseEntity<?> getAll();
     ResponseEntity<?> getByID(@PathVariable UUID id);

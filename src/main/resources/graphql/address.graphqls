@@ -4,23 +4,24 @@ type Address {
     floor: String
     department: String
     street: Street
-    city: String
+    city: City
+    people: [Person]
+    center: Center
+    socialWork: SocialWork
+    supplier: Supplier
 }
 
 input InputAddress {
     number: Int!
     floor: String
     department: String
-    street: String!
-    city: String!
+    street: ID!
+    city: ID!
 }
 
 type QueryAddress{
     getAll: [Address]
     getByID(id: ID!): Address
-    create(input: InputAddress!): Boolean
-    update(id: ID!, input: InputAddress!): Boolean
-    delete(id: ID!): Boolean
 }
 
 type MutationAddress {

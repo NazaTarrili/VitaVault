@@ -2,15 +2,15 @@ type Appointment {
     id: ID
     date: String
     finished: Boolean
-    schedule: String
-    patient: String
+    schedule: Schedule
+    patient: Patient
 }
 
 input InputAppointment {
     date: String!
     finished: Boolean!
-    schedule: String!
-    patient: String!
+    schedule: ID!
+    patient: ID!
 }
 
 type QueryAppointment {

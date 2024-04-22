@@ -6,7 +6,6 @@ import com.vitavault.vitavault.util.NotFoundException;
 import com.vitavault.vitavault.util.nullPropertyNames.IGetNullPropertyNames;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +20,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     @Override
     public List<E> getAll() throws Exception {
         try {
-            return repository.findAll(Sort.by("id"));
+            return (List<E>) repository.findAll();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

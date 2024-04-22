@@ -1,0 +1,22 @@
+type CenterType {
+    id: ID
+    name: String
+    CenterTypes: [CenterType]
+    subscriptionPlan: SubscriptionPlan
+}
+
+input InputCenterType {
+    name: String!
+    subscriptionPlan: ID
+}
+
+type QueryCenterType {
+    getAll: [CenterType]
+    getByID(id: ID!): CenterType
+}
+
+type MutationCenterType {
+    create(input: InputCenterType!): Boolean
+    update(id: ID!, input: InputCenterType!): Boolean
+    delete(id: ID!): Boolean
+}

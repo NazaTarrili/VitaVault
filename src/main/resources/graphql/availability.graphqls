@@ -1,0 +1,25 @@
+type Availability {
+    id: ID
+    day: String
+    start: String
+    end: String
+    schedule: Schedule
+}
+
+input InputAvailability {
+    day: String!
+    start: String!
+    end: String!
+    schedule: ID!
+}
+
+type QueryAvailability {
+    getAll: [Availability]
+    getByID(id: ID!): Availability
+}
+
+type MutationAvailability {
+    create(input: InputAvailability!): Boolean
+    update(id: ID!, input: InputAvailability!): Boolean
+    delete(id: ID!): Boolean
+}
