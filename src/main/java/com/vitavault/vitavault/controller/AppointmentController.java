@@ -1,8 +1,8 @@
 package com.vitavault.vitavault.controller;
 
 import com.vitavault.vitavault.controller.base.IBaseController;
-import com.vitavault.vitavault.domain.Availability;
-import com.vitavault.vitavault.service.availability.IAvailabilityService;
+import com.vitavault.vitavault.domain.Appointment;
+import com.vitavault.vitavault.service.appointment.IAppointmentService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +13,18 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping(value = "/api/v3/availability")
+@RequestMapping(value = "/api/v3/appointment")
 @CrossOrigin(origins = "*")
-public class AvailabilityResource implements IBaseController<Availability> {
+public class AppointmentController implements IBaseController<Appointment> {
     @Autowired
-    private IAvailabilityService service;
+    private IAppointmentService service;
 
     @Autowired
     private CustomResponses responses;
 
     @Override
     @PostMapping
-    public ResponseEntity<ResponseFormatter> create(@RequestBody Availability entity) {
+    public ResponseEntity<ResponseFormatter> create(@RequestBody Appointment entity) {
         try {
             if (service.create(entity)) return responses.created();
 
@@ -56,7 +56,7 @@ public class AvailabilityResource implements IBaseController<Availability> {
 
     @Override
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Availability entity) {
+    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Appointment entity) {
         try {
             if (service.update(id, entity)) return responses.updated();
 

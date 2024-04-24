@@ -1,5 +1,7 @@
 package com.vitavault.vitavault.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.domain.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,6 +13,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Bed extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;

@@ -6,6 +6,7 @@ import com.vitavault.vitavault.util.NotFoundException;
 import com.vitavault.vitavault.util.nullPropertyNames.IGetNullPropertyNames;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     private IGetNullPropertyNames nullPropertyNames;
 
     @Override
+    @Transactional(readOnly = true)
     public List<E> getAll() throws Exception {
         try {
             return (List<E>) repository.findAll();
@@ -27,6 +29,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     }
 
     @Override
+    @Transactional(readOnly = true)
     public E getByID(UUID id) throws Exception {
         try {
             return repository.findById(id).orElseThrow(NotFoundException::new);
@@ -36,6 +39,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     }
 
     @Override
+    @Transactional
     public boolean create(E entity) throws Exception {
         try {
             repository.save(entity);
@@ -46,6 +50,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     }
 
     @Override
+    @Transactional
     public boolean update(UUID id, E newEntity) throws Exception {
         try {
             E entity = repository.findById(id).orElseThrow(NotFoundException::new);
@@ -58,6 +63,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     }
 
     @Override
+    @Transactional
     public boolean delete(UUID id) throws Exception {
         try {
             if (repository.existsById(id)) {

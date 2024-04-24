@@ -1,9 +1,11 @@
 package com.vitavault.vitavault.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.domain.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
@@ -16,11 +18,11 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Country extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private Set<State> states;
 }
