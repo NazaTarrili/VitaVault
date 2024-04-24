@@ -1,0 +1,20 @@
+type SupplyType {
+    id: ID
+    name: String
+    supplies: [SupplyType]
+}
+
+input InputSupplyType {
+    name: String!
+}
+
+type QuerySupplyType {
+    getAll: [SupplyType]
+    getByID(id: ID!): SupplyType
+}
+
+type MutationSupplyType {
+    create(input: InputSupplyType!): Boolean
+    update(id: ID!, input: InputSupplyType!): Boolean
+    delete(id: ID!): Boolean
+}

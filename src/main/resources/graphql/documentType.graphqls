@@ -1,0 +1,20 @@
+type DocumentType {
+    id: ID
+    name: String
+    people: [Person]
+}
+
+input InputDocumentType {
+    name: String!
+}
+
+type QueryDocumentType {
+    getAll: [DocumentType]
+    getByID(id: ID!): DocumentType
+}
+
+type MutationDocumentType {
+    create(input: InputDocumentType!): Boolean
+    update(id: ID!, input: InputDocumentType!): Boolean
+    delete(id: ID!): Boolean
+}

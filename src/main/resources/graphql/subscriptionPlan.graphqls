@@ -1,0 +1,25 @@
+type SubscriptionPlan {
+    id: ID
+    name: String
+    cost: Float
+    terms: String
+    periodicity: Periodicity
+}
+
+input InputSubscriptionPlan {
+    name: String!
+    cost: Float!
+    terms: String!
+    periodicity: ID!
+}
+
+type QuerySubscriptionPlan {
+    getAll: [SubscriptionPlan]
+    getByID(id: ID!): SubscriptionPlan
+}
+
+type MutationSubscriptionPlan {
+    create(input: InputSubscriptionPlan!): Boolean
+    update(id: ID!, input: InputSubscriptionPlan!): Boolean
+    delete(id: ID!): Boolean
+}

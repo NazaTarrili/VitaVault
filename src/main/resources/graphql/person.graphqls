@@ -1,0 +1,43 @@
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
+
+type Person {
+    id: ID
+    name: String
+    lastname: String
+    document: String
+    phoneNumber: String
+    email: String
+    gender: Gender
+    birthdate: String
+    registrationDate: String
+    address: Address
+    documentType: DocumentType
+    patient: Patient
+}
+
+input InputPerson {
+    name: String!
+    lastname: String!
+    document: String!
+    phoneNumber: String!
+    email: String
+    gender: Gender!
+    birthdate: String
+    address: ID!
+    documentType: ID!
+}
+
+type QueryPerson {
+    getAll: [Person]
+    getByID(id: ID!): Person
+}
+
+type MutationPerson {
+    create(input: InputPerson!): Boolean
+    update(id: ID!, input: InputPerson!): Boolean
+    delete(id: ID!): Boolean
+}

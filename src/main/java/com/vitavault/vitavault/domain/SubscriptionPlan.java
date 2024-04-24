@@ -16,7 +16,7 @@ public class SubscriptionPlan extends BaseEntity {
     private String name;
 
     @Column(nullable = false)
-    private Double cost;
+    private float cost;
 
     @Column(nullable = false)
     private String terms;

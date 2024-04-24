@@ -1,0 +1,29 @@
+type User {
+    id: ID
+    password: String
+    active: Boolean
+    schedules: [Schedule]
+    center: Center
+    person: Person
+    role: Role
+    episodeDetails: [EpisodeDetail]
+}
+
+input InputUser {
+    password: String!
+    active: Boolean!
+    center: ID!
+    person: ID!
+    role: ID!
+}
+
+type QueryUser {
+    getAll: [User]
+    getByID(id: ID!): User
+}
+
+type MutationUser {
+    create(input: InputUser!): Boolean
+    update(id: ID!, input: InputUser!): Boolean
+    delete(id: ID!): Boolean
+}

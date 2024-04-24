@@ -1,0 +1,33 @@
+enum DayOfWeek {
+    MONDAY
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+}
+
+type Periodicity {
+    id: ID
+    day: DayOfWeek
+    start: String
+    end: String
+}
+
+input InputPeriodicity {
+    day: DayOfWeek!
+    start: String!
+    end: String!
+}
+
+type QueryPeriodicity {
+    getAll: [Periodicity]
+    getByID(id: ID!): Periodicity
+}
+
+type MutationPeriodicity {
+    create(input: InputPeriodicity!): Boolean
+    update(id: ID!, input: InputPeriodicity!): Boolean
+    delete(id: ID!): Boolean
+}

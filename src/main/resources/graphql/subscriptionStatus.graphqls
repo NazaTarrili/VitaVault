@@ -1,0 +1,20 @@
+type SubscriptionStatus {
+    id: ID
+    name: String
+    centers: [Center]
+}
+
+input InputSubscriptionStatus {
+    name: String!
+}
+
+type QuerySubscriptionStatus {
+    getAll: [SubscriptionStatus]
+    getByID(id: ID!): SubscriptionStatus
+}
+
+type MutationSubscriptionStatus {
+    create(input: InputSubscriptionStatus!): Boolean
+    update(id: ID!, input: InputSubscriptionStatus!): Boolean
+    delete(id: ID!): Boolean
+}

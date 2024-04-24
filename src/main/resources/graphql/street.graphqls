@@ -1,6 +1,7 @@
 type Street {
     id: ID
     name:String
+    addresses: [Address]
 }
 
 input InputStreet {

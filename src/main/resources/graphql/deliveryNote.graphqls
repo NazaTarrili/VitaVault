@@ -1,0 +1,25 @@
+type DeliveryNote {
+    id: ID
+    date: String
+    quantity: Int
+    deliveryNoteType: DeliveryNoteType
+    supply: Supply
+}
+
+input InputDeliveryNote {
+    date: String!
+    quantity: Int!
+    deliveryNoteType: ID!
+    supply: ID!
+}
+
+type QueryDeliveryNote {
+    getAll: [DeliveryNote]
+    getByID(id: ID!): DeliveryNote
+}
+
+type MutationDeliveryNote {
+    create(input: InputDeliveryNote!): Boolean
+    update(id: ID!, input: InputDeliveryNote!): Boolean
+    delete(id: ID!): Boolean
+}

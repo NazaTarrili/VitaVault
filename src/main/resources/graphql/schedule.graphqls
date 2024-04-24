@@ -1,0 +1,23 @@
+type Schedule {
+    id: ID
+    user: User
+    availabilities: [Availability]
+    specialty: Specialty
+    appointments: [Appointment]
+}
+
+input InputSchedule {
+    user: ID!
+    specialty: ID!
+}
+
+type QuerySchedule {
+    getAll: [Schedule]
+    getByID(id: ID!): Schedule
+}
+
+type MutationSchedule {
+    create(input: InputSchedule!): Boolean
+    update(id: ID!, input: InputSchedule!): Boolean
+    delete(id: ID!): Boolean
+}

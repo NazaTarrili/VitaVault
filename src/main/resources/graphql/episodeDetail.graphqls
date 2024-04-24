@@ -1,0 +1,33 @@
+type EpisodeDetail {
+    id: ID
+    note: String
+    date: String
+    bed: Bed
+    treatment: Treatment
+    supplies: [Supply]
+    users: [User]
+    episodeDetailStatus: DetailStatus
+    episode: Episode
+}
+
+input InputEpisodeDetail {
+    note: String!
+    date: String!
+    bed: ID!
+    treatment: ID!
+    supplies: [ID]!
+    users: [ID]!
+    episodeDetailStatus: ID!
+    episode: ID!
+}
+
+type QueryEpisodeDetail {
+    getAll: [EpisodeDetail]
+    getByID(id: ID!): EpisodeDetail
+}
+
+type MutationEpisodeDetail {
+    create(input: InputEpisodeDetail!): Boolean
+    update(id: ID!, input: InputEpisodeDetail!): Boolean
+    delete(id: ID!): Boolean
+}

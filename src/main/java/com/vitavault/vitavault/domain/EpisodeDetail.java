@@ -46,7 +46,7 @@ public class EpisodeDetail extends BaseEntity {
             joinColumns = @JoinColumn(name = "episodeDetailId"),
             inverseJoinColumns = @JoinColumn(name = "userId")
     )
-    private Set<User> user;
+    private Set<User> users;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "episode_detail_status_id", nullable = false)

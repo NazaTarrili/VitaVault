@@ -1,0 +1,24 @@
+type Room {
+    id: ID
+    name: String
+    roomType: RoomType
+    center: Center
+    beds: [Bed]
+}
+
+input InputRoom {
+    name: String!
+    roomType: ID
+    center: ID!
+}
+
+type QueryRoom {
+    getAll: [Room]
+    getByID(id: ID!): Room
+}
+
+type MutationRoom {
+    create(input: InputRoom!): Boolean
+    update(id: ID!, input: InputRoom!): Boolean
+    delete(id: ID!): Boolean
+}

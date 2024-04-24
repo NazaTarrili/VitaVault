@@ -3,6 +3,7 @@ package com.vitavault.vitavault.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.domain.base.BaseEntity;
+import com.vitavault.vitavault.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,7 +34,7 @@ public class Person extends BaseEntity {
     private String email;
 
     @Column(nullable = false)
-    private Boolean gender;
+    private Gender gender;
 
     @Column(nullable = false)
     private LocalDateTime birthdate;

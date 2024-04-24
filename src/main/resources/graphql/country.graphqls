@@ -1,0 +1,20 @@
+type Country {
+    id: ID
+    name: String
+    states: [State]
+}
+
+input InputCountry {
+    name: String!
+}
+
+type QueryCountry {
+    getAll: [Country]
+    getByID(id: ID!): Country
+}
+
+type MutationCountry {
+    create(input: InputCountry!): Boolean
+    update(id: ID!, input: InputCountry!): Boolean
+    delete(id: ID!): Boolean
+}

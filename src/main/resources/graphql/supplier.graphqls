@@ -1,0 +1,22 @@
+type Supplier {
+    id: ID
+    name: String
+    address: Address
+    supplies: [Supply]
+}
+
+input InputSupplier {
+    name: String!
+    address: ID!
+}
+
+type QuerySupplier {
+    getAll: [Supplier]
+    getByID(id: ID!): Supplier
+}
+
+type MutationSupplier {
+    create(input: InputSupplier!): Boolean
+    update(id: ID!, input: InputSupplier!): Boolean
+    delete(id: ID!): Boolean
+}

@@ -1,0 +1,22 @@
+type Plan {
+    id: ID
+    name: String
+    socialWork: SocialWork
+    patients: [Patient]
+}
+
+input InputPlan {
+    name: String!
+    socialWork: ID!
+}
+
+type QueryPlan {
+    getAll: [Plan]
+    getByID(id: ID!): Plan
+}
+
+type MutationPlan {
+    create(input: InputPlan!): Boolean
+    update(id: ID!, input: InputPlan!): Boolean
+    delete(id: ID!): Boolean
+}
