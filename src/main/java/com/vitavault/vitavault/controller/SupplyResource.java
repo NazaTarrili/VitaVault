@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.Supply;
 import com.vitavault.vitavault.service.supply.ISupplyService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/supply")
 @CrossOrigin(origins = "*")
-public class SupplyResource implements IBaseController<Supply> {
+public class SupplyResource {
     @Autowired
     private ISupplyService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody Supply entity) {
         try {
@@ -34,7 +32,6 @@ public class SupplyResource implements IBaseController<Supply> {
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class SupplyResource implements IBaseController<Supply> {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class SupplyResource implements IBaseController<Supply> {
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Supply entity) {
         try {
@@ -66,7 +61,6 @@ public class SupplyResource implements IBaseController<Supply> {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {

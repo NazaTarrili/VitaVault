@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.RoomType;
 import com.vitavault.vitavault.service.type.room.IRoomTypeService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/type/room")
 @CrossOrigin(origins = "*")
-public class RoomTypeResource implements IBaseController<RoomType> {
+public class RoomTypeResource {
     @Autowired
     private IRoomTypeService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody RoomType entity) {
         try {
@@ -34,7 +32,6 @@ public class RoomTypeResource implements IBaseController<RoomType> {
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class RoomTypeResource implements IBaseController<RoomType> {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class RoomTypeResource implements IBaseController<RoomType> {
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody RoomType entity) {
         try {
@@ -66,7 +61,6 @@ public class RoomTypeResource implements IBaseController<RoomType> {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {

@@ -20,12 +20,12 @@ input InputAddress {
 }
 
 type QueryAddress{
-    getAll: [Address]
-    getByID(id: ID!): Address
+    getAllAddress: [Address]
+    getAddressByID(id: ID!): Address
 }
 
 type MutationAddress {
-    create(input: InputAddress!): Boolean
-    update(id: ID!, input: InputAddress!): Boolean
-    delete(id: ID!): Boolean
+    createAddress(input: InputAddress!): Boolean
+    updateAddress(id: ID!, input: InputAddress!): Boolean
+    deleteAddress(id: ID!): Boolean
 }

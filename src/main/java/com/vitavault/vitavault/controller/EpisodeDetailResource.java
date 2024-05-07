@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.EpisodeDetail;
 import com.vitavault.vitavault.service.episodeDetail.IEpisodeDetailService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/episodeDetail")
 @CrossOrigin(origins = "*")
-public class EpisodeDetailResource implements IBaseController<EpisodeDetail> {
+public class EpisodeDetailResource {
     @Autowired
     private IEpisodeDetailService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody EpisodeDetail entity) {
         try {
@@ -34,7 +32,6 @@ public class EpisodeDetailResource implements IBaseController<EpisodeDetail> {
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class EpisodeDetailResource implements IBaseController<EpisodeDetail> {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class EpisodeDetailResource implements IBaseController<EpisodeDetail> {
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody EpisodeDetail entity) {
         try {
@@ -66,7 +61,6 @@ public class EpisodeDetailResource implements IBaseController<EpisodeDetail> {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {

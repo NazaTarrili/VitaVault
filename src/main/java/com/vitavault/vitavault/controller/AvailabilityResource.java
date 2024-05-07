@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.Availability;
 import com.vitavault.vitavault.service.availability.IAvailabilityService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/availability")
 @CrossOrigin(origins = "*")
-public class AvailabilityResource implements IBaseController<Availability> {
+public class AvailabilityResource {
     @Autowired
     private IAvailabilityService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody Availability entity) {
         try {
@@ -34,7 +32,6 @@ public class AvailabilityResource implements IBaseController<Availability> {
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class AvailabilityResource implements IBaseController<Availability> {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class AvailabilityResource implements IBaseController<Availability> {
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Availability entity) {
         try {
@@ -66,7 +61,6 @@ public class AvailabilityResource implements IBaseController<Availability> {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {

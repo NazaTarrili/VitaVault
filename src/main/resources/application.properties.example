@@ -1,5 +1,5 @@
 #Database config
-spring.datasource.url=${JDBC_DATABASE_URL\:jdbc\:mysql\://localhost\:3306/sigis?serverTimezone\=UTC&createDatabaseIfNotExist=true}
+spring.datasource.url=${JDBC_DATABASE_URL\:jdbc\:mysql\://localhost\:3306/vitavault?serverTimezone\=UTC&createDatabaseIfNotExist=true}
 spring.datasource.username=${JDBC_DATABASE_USERNAME\:<<YOUR_DATABASE_USERNAME>>}
 spring.datasource.password=${JDBC_DATABASE_PASSWORD\:<<YOUR_DATABASE_PASSWORD>>\}
 spring.datasource.dbcp2.max-wait-millis=30000

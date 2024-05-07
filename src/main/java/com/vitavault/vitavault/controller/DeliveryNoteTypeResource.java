@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.DeliveryNoteType;
 import com.vitavault.vitavault.service.type.deliveryNote.IDeliveryNoteTypeService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/type/deliveryNote")
 @CrossOrigin(origins = "*")
-public class DeliveryNoteTypeResource implements IBaseController<DeliveryNoteType> {
+public class DeliveryNoteTypeResource {
     @Autowired
     private IDeliveryNoteTypeService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody DeliveryNoteType entity) {
         try {
@@ -34,7 +32,6 @@ public class DeliveryNoteTypeResource implements IBaseController<DeliveryNoteTyp
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class DeliveryNoteTypeResource implements IBaseController<DeliveryNoteTyp
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class DeliveryNoteTypeResource implements IBaseController<DeliveryNoteTyp
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody DeliveryNoteType entity) {
         try {
@@ -66,7 +61,6 @@ public class DeliveryNoteTypeResource implements IBaseController<DeliveryNoteTyp
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {

@@ -1,6 +1,5 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.controller.base.IBaseController;
 import com.vitavault.vitavault.domain.Periodicity;
 import com.vitavault.vitavault.service.periodicity.IPeriodicityService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
@@ -15,14 +14,13 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/api/v3/periodicity")
 @CrossOrigin(origins = "*")
-public class PeriodicityResource implements IBaseController<Periodicity> {
+public class PeriodicityResource {
     @Autowired
     private IPeriodicityService service;
 
     @Autowired
     private CustomResponses responses;
 
-    @Override
     @PostMapping
     public ResponseEntity<ResponseFormatter> create(@RequestBody Periodicity entity) {
         try {
@@ -34,7 +32,6 @@ public class PeriodicityResource implements IBaseController<Periodicity> {
         }
     }
 
-    @Override
     @GetMapping
     public ResponseEntity<ResponseFormatter> getAll() {
         try {
@@ -44,7 +41,6 @@ public class PeriodicityResource implements IBaseController<Periodicity> {
         }
     }
 
-    @Override
     @GetMapping("/{id}")
     public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
         try {
@@ -54,7 +50,6 @@ public class PeriodicityResource implements IBaseController<Periodicity> {
         }
     }
 
-    @Override
     @PutMapping("/{id}")
     public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Periodicity entity) {
         try {
@@ -66,7 +61,6 @@ public class PeriodicityResource implements IBaseController<Periodicity> {
         }
     }
 
-    @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
         try {
