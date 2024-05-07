@@ -9,12 +9,12 @@ input InputEpisodeType {
 }
 
 type QueryEpisodeType {
-    getAll: [EpisodeType]
-    getByID(id: ID!): EpisodeType
+    getAllEpisodeType: [EpisodeType]
+    getEpisodeType(id: ID!): EpisodeType
 }
 
 type MutationEpisodeType {
-    create(input: InputEpisodeType!): Boolean
-    update(id: ID!, input: InputEpisodeType!): Boolean
-    delete(id: ID!): Boolean
+    createEpisodeType(input: InputEpisodeType!): Boolean
+    updateEpisodeType(id: ID!, input: InputEpisodeType!): Boolean
+    deleteEpisodeType(id: ID!): Boolean
 }

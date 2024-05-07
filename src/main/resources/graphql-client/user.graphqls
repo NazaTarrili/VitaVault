@@ -18,12 +18,12 @@ input InputUser {
 }
 
 type QueryUser {
-    getAll: [User]
-    getByID(id: ID!): User
+    getAllUser: [User]
+    getUser(id: ID!): User
 }
 
 type MutationUser {
-    create(input: InputUser!): Boolean
-    update(id: ID!, input: InputUser!): Boolean
-    delete(id: ID!): Boolean
+    createUser(input: InputUser!): Boolean
+    updateUser(id: ID!, input: InputUser!): Boolean
+    deleteUser(id: ID!): Boolean
 }

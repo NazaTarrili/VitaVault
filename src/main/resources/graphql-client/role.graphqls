@@ -9,12 +9,12 @@ input InputRole {
 }
 
 type QueryRole {
-    getAll: [Role]
-    getByID(id: ID!): Role
+    getAllRole: [Role]
+    getRole(id: ID!): Role
 }
 
 type MutationRole {
-    create(input: InputRole!): Boolean
-    update(id: ID!, input: InputRole!): Boolean
-    delete(id: ID!): Boolean
+    createRole(input: InputRole!): Boolean
+    updateRole(id: ID!, input: InputRole!): Boolean
+    deleteRole(id: ID!): Boolean
 }

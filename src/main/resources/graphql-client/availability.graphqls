@@ -14,12 +14,12 @@ input InputAvailability {
 }
 
 type QueryAvailability {
-    getAll: [Availability]
-    getByID(id: ID!): Availability
+    getAllAvailability: [Availability]
+    getAvailability(id: ID!): Availability
 }
 
 type MutationAvailability {
-    create(input: InputAvailability!): Boolean
-    update(id: ID!, input: InputAvailability!): Boolean
-    delete(id: ID!): Boolean
+    createAvailability(input: InputAvailability!): Boolean
+    updateAvailability(id: ID!, input: InputAvailability!): Boolean
+    deleteAvailability(id: ID!): Boolean
 }

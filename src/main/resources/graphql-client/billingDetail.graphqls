@@ -24,12 +24,12 @@ input InputBillingDetail {
 }
 
 type QueryBillingDetail {
-    getAll: [BillingDetail]
-    getByID(id: ID!): BillingDetail
+    getAllBillingDetail: [BillingDetail]
+    getBillingDetail(id: ID!): BillingDetail
 }
 
 type MutationBillingDetail {
-    create(input: InputBillingDetail!): Boolean
-    update(id: ID!, input: InputBillingDetail!): Boolean
-    delete(id: ID!): Boolean
+    createBillingDetail(input: InputBillingDetail!): Boolean
+    updateBillingDetail(id: ID!, input: InputBillingDetail!): Boolean
+    deleteBillingDetail(id: ID!): Boolean
 }

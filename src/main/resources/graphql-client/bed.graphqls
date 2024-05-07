@@ -12,12 +12,12 @@ input InputBed {
 }
 
 type QueryBed {
-    getAll: [Bed]
-    getByID(id: ID!): Bed
+    getAllBed: [Bed]
+    getBed(id: ID!): Bed
 }
 
 type MutationBed {
-    create(input: InputBed!): Boolean
-    update(id: ID!, input: InputBed!): Boolean
-    delete(id: ID!): Boolean
+    createBed(input: InputBed!): Boolean
+    updateBed(id: ID!, input: InputBed!): Boolean
+    deleteBed(id: ID!): Boolean
 }

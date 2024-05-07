@@ -20,12 +20,12 @@ input InputSupply {
 }
 
 type QuerySupply {
-    getAll: [Supply]
-    getByID(id: ID!): Supply
+    getAllSupply: [Supply]
+    getSupply(id: ID!): Supply
 }
 
 type MutationSupply {
-    create(input: InputSupply!): Boolean
-    update(id: ID!, input: InputSupply!): Boolean
-    delete(id: ID!): Boolean
+    createSupply(input: InputSupply!): Boolean
+    updateSupply(id: ID!, input: InputSupply!): Boolean
+    deleteSupply(id: ID!): Boolean
 }

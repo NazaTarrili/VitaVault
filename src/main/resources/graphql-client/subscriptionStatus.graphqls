@@ -9,12 +9,12 @@ input InputSubscriptionStatus {
 }
 
 type QuerySubscriptionStatus {
-    getAll: [SubscriptionStatus]
-    getByID(id: ID!): SubscriptionStatus
+    getAllSubscriptionStatus: [SubscriptionStatus]
+    getSubscriptionStatus(id: ID!): SubscriptionStatus
 }
 
 type MutationSubscriptionStatus {
-    create(input: InputSubscriptionStatus!): Boolean
-    update(id: ID!, input: InputSubscriptionStatus!): Boolean
-    delete(id: ID!): Boolean
+    createSubscriptionStatus(input: InputSubscriptionStatus!): Boolean
+    updateSubscriptionStatus(id: ID!, input: InputSubscriptionStatus!): Boolean
+    deleteSubscriptionStatus(id: ID!): Boolean
 }

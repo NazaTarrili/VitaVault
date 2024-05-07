@@ -11,12 +11,12 @@ input InputCenterType {
 }
 
 type QueryCenterType {
-    getAll: [CenterType]
-    getByID(id: ID!): CenterType
+    getAllCenterType: [CenterType]
+    getCenterType(id: ID!): CenterType
 }
 
 type MutationCenterType {
-    create(input: InputCenterType!): Boolean
-    update(id: ID!, input: InputCenterType!): Boolean
-    delete(id: ID!): Boolean
+    createCenterType(input: InputCenterType!): Boolean
+    updateCenterType(id: ID!, input: InputCenterType!): Boolean
+    deleteCenterType(id: ID!): Boolean
 }

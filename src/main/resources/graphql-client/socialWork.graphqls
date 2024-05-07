@@ -10,12 +10,12 @@ input InputSocialWork {
 }
 
 type QuerySocialWork {
-    getAll: [SocialWork]
-    getByID(id: ID!): SocialWork
+    getAllSocialWork: [SocialWork]
+    getSocialWork(id: ID!): SocialWork
 }
 
 type MutationSocialWork {
-    create(input: InputSocialWork!): Boolean
-    update(id: ID!, input: InputSocialWork!): Boolean
-    delete(id: ID!): Boolean
+    createSocialWork(input: InputSocialWork!): Boolean
+    updateSocialWork(id: ID!, input: InputSocialWork!): Boolean
+    deleteSocialWork(id: ID!): Boolean
 }

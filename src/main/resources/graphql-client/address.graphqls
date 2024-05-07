@@ -21,7 +21,7 @@ input InputAddress {
 
 type QueryAddress{
     getAllAddress: [Address]
-    getAddressByID(id: ID!): Address
+    getAddress(id: ID!): Address
 }
 
 type MutationAddress {

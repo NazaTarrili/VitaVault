@@ -8,12 +8,12 @@ input InputTreatment {
 }
 
 type QueryTreatment {
-    getAll: [Treatment]
-    getByID(id: ID!): Treatment
+    getAllTreatment: [Treatment]
+    getTreatment(id: ID!): Treatment
 }
 
 type MutationTreatment {
-    create(input: InputTreatment!): Boolean
-    update(id: ID!, input: InputTreatment!): Boolean
-    delete(id: ID!): Boolean
+    createTreatment(input: InputTreatment!): Boolean
+    updateTreatment(id: ID!, input: InputTreatment!): Boolean
+    deleteTreatment(id: ID!): Boolean
 }

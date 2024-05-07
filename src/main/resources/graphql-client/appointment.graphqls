@@ -14,12 +14,12 @@ input InputAppointment {
 }
 
 type QueryAppointment {
-    getAll: [Appointment]
-    getByID(id: ID!): Appointment
+    getAllAppointment: [Appointment]
+    getAppointment(id: ID!): Appointment
 }
 
 type MutationAppointment {
-    create(input: InputAppointment!): Boolean
-    update(id: ID!, input: InputAppointment!): Boolean
-    delete(id: ID!): Boolean
+    createAppointment(input: InputAppointment!): Boolean
+    updateAppointment(id: ID!, input: InputAppointment!): Boolean
+    deleteAppointment(id: ID!): Boolean
 }

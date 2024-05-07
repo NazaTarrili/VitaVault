@@ -14,12 +14,12 @@ input InputSubscriptionPlan {
 }
 
 type QuerySubscriptionPlan {
-    getAll: [SubscriptionPlan]
-    getByID(id: ID!): SubscriptionPlan
+    getAllSubscriptionPlan: [SubscriptionPlan]
+    getSubscriptionPlan(id: ID!): SubscriptionPlan
 }
 
 type MutationSubscriptionPlan {
-    create(input: InputSubscriptionPlan!): Boolean
-    update(id: ID!, input: InputSubscriptionPlan!): Boolean
-    delete(id: ID!): Boolean
+    createSubscriptionPlan(input: InputSubscriptionPlan!): Boolean
+    updateSubscriptionPlan(id: ID!, input: InputSubscriptionPlan!): Boolean
+    deleteSubscriptionPlan(id: ID!): Boolean
 }

@@ -9,12 +9,12 @@ input InputDetailStatus {
 }
 
 type QueryDetailStatus {
-    getAll: [DetailStatus]
-    getByID(id: ID!): DetailStatus
+    getAllDetailStatus: [DetailStatus]
+    getDetailStatus(id: ID!): DetailStatus
 }
 
 type MutationDetailStatus {
-    create(input: InputDetailStatus!): Boolean
-    update(id: ID!, input: InputDetailStatus!): Boolean
-    delete(id: ID!): Boolean
+    createDetailStatus(input: InputDetailStatus!): Boolean
+    updateDetailStatus(id: ID!, input: InputDetailStatus!): Boolean
+    deleteDetailStatus(id: ID!): Boolean
 }

@@ -12,12 +12,12 @@ input InputPatient {
 }
 
 type QueryPatient {
-    getAll: [Patient]
-    getByID(id: ID!): Patient
+    getAllPatient: [Patient]
+    getPatient(id: ID!): Patient
 }
 
 type MutationPatient {
-    create(input: InputPatient!): Boolean
-    update(id: ID!, input: InputPatient!): Boolean
-    delete(id: ID!): Boolean
+    createPatient(input: InputPatient!): Boolean
+    updatePatient(id: ID!, input: InputPatient!): Boolean
+    deletePatient(id: ID!): Boolean
 }

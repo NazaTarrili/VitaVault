@@ -22,12 +22,12 @@ input InputPeriodicity {
 }
 
 type QueryPeriodicity {
-    getAll: [Periodicity]
-    getByID(id: ID!): Periodicity
+    getAllPeriodicity: [Periodicity]
+    getPeriodicity(id: ID!): Periodicity
 }
 
 type MutationPeriodicity {
-    create(input: InputPeriodicity!): Boolean
-    update(id: ID!, input: InputPeriodicity!): Boolean
-    delete(id: ID!): Boolean
+    createPeriodicity(input: InputPeriodicity!): Boolean
+    updatePeriodicity(id: ID!, input: InputPeriodicity!): Boolean
+    deletePeriodicity(id: ID!): Boolean
 }

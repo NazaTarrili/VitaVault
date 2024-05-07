@@ -22,12 +22,12 @@ input InputEpisodeDetail {
 }
 
 type QueryEpisodeDetail {
-    getAll: [EpisodeDetail]
-    getByID(id: ID!): EpisodeDetail
+    getAllEpisodeDetail: [EpisodeDetail]
+    getEpisodeDetail(id: ID!): EpisodeDetail
 }
 
 type MutationEpisodeDetail {
-    create(input: InputEpisodeDetail!): Boolean
-    update(id: ID!, input: InputEpisodeDetail!): Boolean
-    delete(id: ID!): Boolean
+    createEpisodeDetail(input: InputEpisodeDetail!): Boolean
+    updateEpisodeDetail(id: ID!, input: InputEpisodeDetail!): Boolean
+    deleteEpisodeDetail(id: ID!): Boolean
 }

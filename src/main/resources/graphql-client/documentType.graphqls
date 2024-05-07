@@ -9,12 +9,12 @@ input InputDocumentType {
 }
 
 type QueryDocumentType {
-    getAll: [DocumentType]
-    getByID(id: ID!): DocumentType
+    getAllDocumentType: [DocumentType]
+    getDocumentType(id: ID!): DocumentType
 }
 
 type MutationDocumentType {
-    create(input: InputDocumentType!): Boolean
-    update(id: ID!, input: InputDocumentType!): Boolean
-    delete(id: ID!): Boolean
+    createDocumentType(input: InputDocumentType!): Boolean
+    updateDocumentType(id: ID!, input: InputDocumentType!): Boolean
+    deleteDocumentType(id: ID!): Boolean
 }

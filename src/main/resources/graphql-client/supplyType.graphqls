@@ -9,12 +9,12 @@ input InputSupplyType {
 }
 
 type QuerySupplyType {
-    getAll: [SupplyType]
-    getByID(id: ID!): SupplyType
+    getAllSupplyType: [SupplyType]
+    getSupplyType(id: ID!): SupplyType
 }
 
 type MutationSupplyType {
-    create(input: InputSupplyType!): Boolean
-    update(id: ID!, input: InputSupplyType!): Boolean
-    delete(id: ID!): Boolean
+    createSupplyType(input: InputSupplyType!): Boolean
+    updateSupplyType(id: ID!, input: InputSupplyType!): Boolean
+    deleteSupplyType(id: ID!): Boolean
 }

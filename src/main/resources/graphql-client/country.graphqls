@@ -9,12 +9,12 @@ input InputCountry {
 }
 
 type QueryCountry {
-    getAll: [Country]
-    getByID(id: ID!): Country
+    getAllCountry: [Country]
+    getCountry(id: ID!): Country
 }
 
 type MutationCountry {
-    create(input: InputCountry!): Boolean
-    update(id: ID!, input: InputCountry!): Boolean
-    delete(id: ID!): Boolean
+    createCountry(input: InputCountry!): Boolean
+    updateCountry(id: ID!, input: InputCountry!): Boolean
+    deleteCountry(id: ID!): Boolean
 }

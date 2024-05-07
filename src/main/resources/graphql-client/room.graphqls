@@ -13,12 +13,12 @@ input InputRoom {
 }
 
 type QueryRoom {
-    getAll: [Room]
-    getByID(id: ID!): Room
+    getAllRoom: [Room]
+    getRoom(id: ID!): Room
 }
 
 type MutationRoom {
-    create(input: InputRoom!): Boolean
-    update(id: ID!, input: InputRoom!): Boolean
-    delete(id: ID!): Boolean
+    createRoom(input: InputRoom!): Boolean
+    updateRoom(id: ID!, input: InputRoom!): Boolean
+    deleteRoom(id: ID!): Boolean
 }

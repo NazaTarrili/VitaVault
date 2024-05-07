@@ -22,17 +22,7 @@ public class AddressController {
     @Autowired
     private CustomResponses responses;
 
-    @MutationMapping
-    public ResponseEntity<ResponseFormatter> createAddress(@Argument Address entity) {
-        try {
-            if (service.create(entity)) return responses.created();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
+    //Queries
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getAllAddress() {
         try {
@@ -43,9 +33,21 @@ public class AddressController {
     }
 
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getAddressByID(@Argument UUID id) {
+    public ResponseEntity<ResponseFormatter> getAddress(@Argument UUID id) {
         try {
             return responses.founded(service.getByID(id));
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+
+    //Mutations
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> createAddress(@Argument Address entity) {
+        try {
+            if (service.create(entity)) return responses.created();
+
+            return responses.badRequest();
         } catch (Exception e) {
             return responses.error(e);
         }

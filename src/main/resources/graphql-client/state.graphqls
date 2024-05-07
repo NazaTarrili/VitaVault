@@ -11,12 +11,12 @@ input InputState {
 }
 
 type QueryState {
-    getAll: [State]
-    getByID(id: ID!): State
+    getAllState: [State]
+    getState(id: ID!): State
 }
 
 type MutationState {
-    create(input: InputState!): Boolean
-    update(id: ID!, input: InputState!): Boolean
-    delete(id: ID!): Boolean
+    createState(input: InputState!): Boolean
+    updateState(id: ID!, input: InputState!): Boolean
+    deleteState(id: ID!): Boolean
 }

@@ -11,12 +11,12 @@ input InputSupplier {
 }
 
 type QuerySupplier {
-    getAll: [Supplier]
-    getByID(id: ID!): Supplier
+    getAllSupplier: [Supplier]
+    getSupplier(id: ID!): Supplier
 }
 
 type MutationSupplier {
-    create(input: InputSupplier!): Boolean
-    update(id: ID!, input: InputSupplier!): Boolean
-    delete(id: ID!): Boolean
+    createSupplier(input: InputSupplier!): Boolean
+    updateSupplier(id: ID!, input: InputSupplier!): Boolean
+    deleteSupplier(id: ID!): Boolean
 }

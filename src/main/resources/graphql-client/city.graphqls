@@ -11,12 +11,12 @@ input InputCity {
 }
 
 type QueryCity {
-    getAll: [City]
-    getByID(id: ID!): City
+    getAllCity: [City]
+    getCity(id: ID!): City
 }
 
 type MutationCity {
-    create(input: InputCity!): Boolean
-    update(id: ID!, input: InputCity!): Boolean
-    delete(id: ID!): Boolean
+    createCity(input: InputCity!): Boolean
+    updateCity(id: ID!, input: InputCity!): Boolean
+    deleteCity(id: ID!): Boolean
 }

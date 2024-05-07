@@ -9,12 +9,12 @@ input InputStreet {
 }
 
 type QueryStreet {
-    getAll: [Street]
-    getByID(id: ID!): Street
+    getAllStreet: [Street]
+    getStreet(id: ID!): Street
 }
 
 type MutationStreet {
-    create(input: InputStreet!): Boolean
-    update(id: ID!, input: InputStreet!): Boolean
-    delete(id: ID!): Boolean
+    createStreet(input: InputStreet!): Boolean
+    updateStreet(id: ID!, input: InputStreet!): Boolean
+    deleteStreet(id: ID!): Boolean
 }

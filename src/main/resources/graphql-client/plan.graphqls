@@ -11,12 +11,12 @@ input InputPlan {
 }
 
 type QueryPlan {
-    getAll: [Plan]
-    getByID(id: ID!): Plan
+    getAllPlan: [Plan]
+    getPlan(id: ID!): Plan
 }
 
 type MutationPlan {
-    create(input: InputPlan!): Boolean
-    update(id: ID!, input: InputPlan!): Boolean
-    delete(id: ID!): Boolean
+    createPlan(input: InputPlan!): Boolean
+    updatePlan(id: ID!, input: InputPlan!): Boolean
+    deletePlan(id: ID!): Boolean
 }

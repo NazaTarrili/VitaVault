@@ -14,12 +14,12 @@ input InputDeliveryNote {
 }
 
 type QueryDeliveryNote {
-    getAll: [DeliveryNote]
-    getByID(id: ID!): DeliveryNote
+    getAllDeliveryNote: [DeliveryNote]
+    getDeliveryNote(id: ID!): DeliveryNote
 }
 
 type MutationDeliveryNote {
-    create(input: InputDeliveryNote!): Boolean
-    update(id: ID!, input: InputDeliveryNote!): Boolean
-    delete(id: ID!): Boolean
+    createDeliveryNote(input: InputDeliveryNote!): Boolean
+    updateDeliveryNote(id: ID!, input: InputDeliveryNote!): Boolean
+    deleteDeliveryNote(id: ID!): Boolean
 }

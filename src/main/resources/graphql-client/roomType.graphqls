@@ -9,12 +9,12 @@ input InputRoomType {
 }
 
 type QueryRoomType {
-    getAll: [RoomType]
-    getByID(id: ID!): RoomType
+    getAllRoomType: [RoomType]
+    getRoomType(id: ID!): RoomType
 }
 
 type MutationRoomType {
-    create(input: InputRoomType!): Boolean
-    update(id: ID!, input: InputRoomType!): Boolean
-    delete(id: ID!): Boolean
+    createRoomType(input: InputRoomType!): Boolean
+    updateRoomType(id: ID!, input: InputRoomType!): Boolean
+    deleteRoomType(id: ID!): Boolean
 }

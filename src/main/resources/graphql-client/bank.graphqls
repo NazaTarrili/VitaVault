@@ -8,12 +8,12 @@ input InputBank {
 }
 
 type QueryBank {
-    getAll: [Bank]
-    getByID(id: ID!): Bank
+    getAllBank: [Bank]
+    getBank(id: ID!): Bank
 }
 
 type MutationBank {
-    create(input: InputBank!): Boolean
-    update(id: ID!, input: InputBank!): Boolean
-    delete(id: ID!): Boolean
+    createBank(input: InputBank!): Boolean
+    updateBank(id: ID!, input: InputBank!): Boolean
+    deleteBank(id: ID!): Boolean
 }

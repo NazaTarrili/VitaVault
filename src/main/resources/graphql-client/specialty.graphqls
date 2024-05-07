@@ -9,12 +9,12 @@ input InputSpecialty {
 }
 
 type QuerySpecialty {
-    getAll: [Specialty]
-    getByID(id: ID!): Specialty
+    getAllSpecialty: [Specialty]
+    getSpecialty(id: ID!): Specialty
 }
 
 type MutationSpecialty {
-    create(input: InputSpecialty!): Boolean
-    update(id: ID!, input: InputSpecialty!): Boolean
-    delete(id: ID!): Boolean
+    createSpecialty(input: InputSpecialty!): Boolean
+    updateSpecialty(id: ID!, input: InputSpecialty!): Boolean
+    deleteSpecialty(id: ID!): Boolean
 }
