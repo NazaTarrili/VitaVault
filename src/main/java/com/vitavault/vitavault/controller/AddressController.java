@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Address;
+import com.vitavault.vitavault.model.domain.Address;
 import com.vitavault.vitavault.service.address.IAddressService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class AddressController {
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createAddress(@Argument Address entity) {
+    public ResponseEntity<ResponseFormatter> createAddress(@Argument Address input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class AddressController {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateAddress(@Argument UUID id, @Argument Address entity) {
+    public ResponseEntity<ResponseFormatter> updateAddress(@Argument UUID id, @Argument Address input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

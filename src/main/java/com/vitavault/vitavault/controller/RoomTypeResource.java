@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.RoomType;
+import com.vitavault.vitavault.model.domain.RoomType;
 import com.vitavault.vitavault.service.type.room.IRoomTypeService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class RoomTypeResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createRoomType(@Argument RoomType entity) {
+    public ResponseEntity<ResponseFormatter> createRoomType(@Argument RoomType input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class RoomTypeResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateRoomType(@Argument UUID id, @Argument RoomType entity) {
+    public ResponseEntity<ResponseFormatter> updateRoomType(@Argument UUID id, @Argument RoomType input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

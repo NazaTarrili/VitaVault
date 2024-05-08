@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Center;
+import com.vitavault.vitavault.model.domain.Center;
 import com.vitavault.vitavault.service.center.ICenterService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class CenterResource {
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createCenter(@Argument Center entity) {
+    public ResponseEntity<ResponseFormatter> createCenter(@Argument Center input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class CenterResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateCenter(@Argument UUID id, @Argument Center entity) {
+    public ResponseEntity<ResponseFormatter> updateCenter(@Argument UUID id, @Argument Center input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

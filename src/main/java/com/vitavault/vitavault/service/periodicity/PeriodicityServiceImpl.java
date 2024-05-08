@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.periodicity;
 
-import com.vitavault.vitavault.domain.Periodicity;
+import com.vitavault.vitavault.model.domain.Periodicity;
 import com.vitavault.vitavault.repository.PeriodicityRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;

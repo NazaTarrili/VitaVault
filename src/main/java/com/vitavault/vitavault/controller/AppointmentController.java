@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Appointment;
+import com.vitavault.vitavault.model.domain.Appointment;
 import com.vitavault.vitavault.service.appointment.IAppointmentService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class AppointmentController {
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createAppointment(@Argument Appointment entity) {
+    public ResponseEntity<ResponseFormatter> createAppointment(@Argument Appointment input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class AppointmentController {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateAppointment(@Argument UUID id, @Argument Appointment entity) {
+    public ResponseEntity<ResponseFormatter> updateAppointment(@Argument UUID id, @Argument Appointment input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Bed;
+import com.vitavault.vitavault.model.domain.Bed;
 import com.vitavault.vitavault.service.bed.IBedService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class BedResource {
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createBed(@Argument Bed entity) {
+    public ResponseEntity<ResponseFormatter> createBed(@Argument Bed input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class BedResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateBed(@Argument UUID id, @Argument Bed entity) {
+    public ResponseEntity<ResponseFormatter> updateBed(@Argument UUID id, @Argument Bed input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

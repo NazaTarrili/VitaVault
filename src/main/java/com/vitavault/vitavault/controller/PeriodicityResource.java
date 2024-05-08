@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Periodicity;
+import com.vitavault.vitavault.model.domain.Periodicity;
 import com.vitavault.vitavault.service.periodicity.IPeriodicityService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class PeriodicityResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createPeriodicity(@Argument Periodicity entity) {
+    public ResponseEntity<ResponseFormatter> createPeriodicity(@Argument Periodicity input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class PeriodicityResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updatePeriodicity(@Argument UUID id, @Argument Periodicity entity) {
+    public ResponseEntity<ResponseFormatter> updatePeriodicity(@Argument UUID id, @Argument Periodicity input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

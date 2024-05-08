@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Street;
+import com.vitavault.vitavault.model.domain.Street;
 import com.vitavault.vitavault.service.street.IStreetService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class StreetResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createStreet(@Argument Street entity) {
+    public ResponseEntity<ResponseFormatter> createStreet(@Argument Street input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class StreetResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateStreet(@Argument UUID id, @Argument Street entity) {
+    public ResponseEntity<ResponseFormatter> updateStreet(@Argument UUID id, @Argument Street input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

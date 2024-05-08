@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.SocialWork;
+import com.vitavault.vitavault.model.domain.SocialWork;
 import com.vitavault.vitavault.service.socialWork.ISocialWorkService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class SocialWorkResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createSocialWork(@Argument SocialWork entity) {
+    public ResponseEntity<ResponseFormatter> createSocialWork(@Argument SocialWork input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class SocialWorkResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateSocialWork(@Argument UUID id, @Argument SocialWork entity) {
+    public ResponseEntity<ResponseFormatter> updateSocialWork(@Argument UUID id, @Argument SocialWork input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Treatment;
+import com.vitavault.vitavault.model.domain.Treatment;
 import com.vitavault.vitavault.service.treatment.ITreatmentService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class TreatmentResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createTreatment(@Argument Treatment entity) {
+    public ResponseEntity<ResponseFormatter> createTreatment(@Argument Treatment input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class TreatmentResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateTreatment(@Argument UUID id, @Argument Treatment entity) {
+    public ResponseEntity<ResponseFormatter> updateTreatment(@Argument UUID id, @Argument Treatment input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

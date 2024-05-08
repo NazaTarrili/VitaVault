@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.repository;
 
-import com.vitavault.vitavault.domain.State;
+import com.vitavault.vitavault.model.domain.State;
 import com.vitavault.vitavault.repository.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 

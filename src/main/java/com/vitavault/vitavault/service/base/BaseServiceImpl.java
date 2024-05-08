@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.base;
 
-import com.vitavault.vitavault.domain.base.BaseEntity;
+import com.vitavault.vitavault.model.domain.base.BaseEntity;
 import com.vitavault.vitavault.repository.base.BaseRepository;
 import com.vitavault.vitavault.util.NotFoundException;
 import com.vitavault.vitavault.util.nullPropertyNames.IGetNullPropertyNames;

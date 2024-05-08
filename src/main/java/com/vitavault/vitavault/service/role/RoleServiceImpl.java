@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.role;
 
-import com.vitavault.vitavault.domain.Role;
+import com.vitavault.vitavault.model.domain.Role;
 import com.vitavault.vitavault.repository.RoleRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;

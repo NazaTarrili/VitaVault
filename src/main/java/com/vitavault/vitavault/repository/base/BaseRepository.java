@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.repository.base;
 
-import com.vitavault.vitavault.domain.base.BaseEntity;
+import com.vitavault.vitavault.model.domain.base.BaseEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 

@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Person;
+import com.vitavault.vitavault.model.domain.Person;
 import com.vitavault.vitavault.service.person.IPersonService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class PersonResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createPerson(@Argument Person entity) {
+    public ResponseEntity<ResponseFormatter> createPerson(@Argument Person input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class PersonResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updatePerson(@Argument UUID id, @Argument Person entity) {
+    public ResponseEntity<ResponseFormatter> updatePerson(@Argument UUID id, @Argument Person input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.SubscriptionStatus;
+import com.vitavault.vitavault.model.domain.SubscriptionStatus;
 import com.vitavault.vitavault.service.status.subscription.ISubscriptionStatusService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class SubscriptionStatusResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createSubscriptionStatus(@Argument SubscriptionStatus entity) {
+    public ResponseEntity<ResponseFormatter> createSubscriptionStatus(@Argument SubscriptionStatus input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class SubscriptionStatusResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateSubscriptionStatus(@Argument UUID id, @Argument SubscriptionStatus entity) {
+    public ResponseEntity<ResponseFormatter> updateSubscriptionStatus(@Argument UUID id, @Argument SubscriptionStatus input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

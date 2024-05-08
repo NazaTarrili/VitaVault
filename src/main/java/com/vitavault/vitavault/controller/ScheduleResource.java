@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.Schedule;
+import com.vitavault.vitavault.model.domain.Schedule;
 import com.vitavault.vitavault.service.schedule.IScheduleService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class ScheduleResource {
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createSchedule(@Argument Schedule entity) {
+    public ResponseEntity<ResponseFormatter> createSchedule(@Argument Schedule input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class ScheduleResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateSchedule(@Argument UUID id, @Argument Schedule entity) {
+    public ResponseEntity<ResponseFormatter> updateSchedule(@Argument UUID id, @Argument Schedule input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

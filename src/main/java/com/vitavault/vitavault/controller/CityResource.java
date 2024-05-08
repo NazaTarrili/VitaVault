@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.domain.City;
+import com.vitavault.vitavault.model.domain.City;
 import com.vitavault.vitavault.service.city.ICityService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -43,9 +43,9 @@ public class CityResource {
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createCity(@Argument City entity) {
+    public ResponseEntity<ResponseFormatter> createCity(@Argument City input) {
         try {
-            if (service.create(entity)) return responses.created();
+            if (service.create(input)) return responses.created();
 
             return responses.badRequest();
         } catch (Exception e) {
@@ -54,9 +54,9 @@ public class CityResource {
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateCity(@Argument UUID id, @Argument City entity) {
+    public ResponseEntity<ResponseFormatter> updateCity(@Argument UUID id, @Argument City input) {
         try {
-            if (service.update(id, entity)) return responses.updated();
+            if (service.update(id, input)) return responses.updated();
 
             return responses.badRequest();
         } catch (Exception e) {

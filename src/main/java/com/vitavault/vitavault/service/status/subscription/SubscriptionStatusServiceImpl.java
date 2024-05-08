@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.status.subscription;
 
-import com.vitavault.vitavault.domain.SubscriptionStatus;
+import com.vitavault.vitavault.model.domain.SubscriptionStatus;
 import com.vitavault.vitavault.repository.SubscriptionStatusRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;

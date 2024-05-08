@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.treatment;
 
-import com.vitavault.vitavault.domain.Treatment;
+import com.vitavault.vitavault.model.domain.Treatment;
 import com.vitavault.vitavault.repository.TreatmentRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.service.type.room;
 
-import com.vitavault.vitavault.domain.RoomType;
+import com.vitavault.vitavault.model.domain.RoomType;
 import com.vitavault.vitavault.repository.RoomTypeRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
