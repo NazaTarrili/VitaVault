@@ -5,24 +5,45 @@ import com.vitavault.vitavault.service.type.document.IDocumentTypeService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
 
-@RestController
-@RequestMapping(value = "/api/v3/type/document")
-@CrossOrigin(origins = "*")
+@Controller
 public class DocumentTypeResource {
     @Autowired
     private IDocumentTypeService service;
 
     @Autowired
     private CustomResponses responses;
+    
+    //Queries
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getAllDocumentType() {
+        try {
+            return responses.founded(service.getAll());
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
 
-    @PostMapping
-    public ResponseEntity<ResponseFormatter> create(@RequestBody DocumentType entity) {
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getDocumentType(@Argument UUID id) {
+        try {
+            return responses.founded(service.getByID(id));
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+    
+    //Mutations
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> createDocumentType(@Argument DocumentType entity) {
         try {
             if (service.create(entity)) return responses.created();
 
@@ -32,26 +53,8 @@ public class DocumentTypeResource {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseFormatter> getAll() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody DocumentType entity) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> updateDocumentType(@Argument UUID id, @Argument DocumentType entity) {
         try {
             if (service.update(id, entity)) return responses.updated();
 
@@ -61,8 +64,8 @@ public class DocumentTypeResource {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> deleteDocumentType(@Argument UUID id) {
         try {
             if(service.delete(id)) return responses.deleted();
 

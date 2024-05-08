@@ -5,24 +5,45 @@ import com.vitavault.vitavault.service.treatment.ITreatmentService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
 
-@RestController
-@RequestMapping(value = "/api/v3/treatment")
-@CrossOrigin(origins = "*")
+@Controller
 public class TreatmentResource {
     @Autowired
     private ITreatmentService service;
 
     @Autowired
     private CustomResponses responses;
+    
+    //Queries
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getAllTreatment() {
+        try {
+            return responses.founded(service.getAll());
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
 
-    @PostMapping
-    public ResponseEntity<ResponseFormatter> create(@RequestBody Treatment entity) {
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getTreatment(@Argument UUID id) {
+        try {
+            return responses.founded(service.getByID(id));
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+    
+    //Mutations
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> createTreatment(@Argument Treatment entity) {
         try {
             if (service.create(entity)) return responses.created();
 
@@ -32,26 +53,8 @@ public class TreatmentResource {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseFormatter> getAll() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Treatment entity) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> updateTreatment(@Argument UUID id, @Argument Treatment entity) {
         try {
             if (service.update(id, entity)) return responses.updated();
 
@@ -61,8 +64,8 @@ public class TreatmentResource {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> deleteTreatment(@Argument UUID id) {
         try {
             if(service.delete(id)) return responses.deleted();
 

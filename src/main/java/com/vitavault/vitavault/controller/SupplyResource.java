@@ -5,24 +5,45 @@ import com.vitavault.vitavault.service.supply.ISupplyService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
 
-@RestController
-@RequestMapping(value = "/api/v3/supply")
-@CrossOrigin(origins = "*")
+@Controller
 public class SupplyResource {
     @Autowired
     private ISupplyService service;
 
     @Autowired
     private CustomResponses responses;
+    
+    //Queries
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getAllSupply() {
+        try {
+            return responses.founded(service.getAll());
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
 
-    @PostMapping
-    public ResponseEntity<ResponseFormatter> create(@RequestBody Supply entity) {
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getSupply(@Argument UUID id) {
+        try {
+            return responses.founded(service.getByID(id));
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+    
+    //Mutations
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> createSupply(@Argument Supply entity) {
         try {
             if (service.create(entity)) return responses.created();
 
@@ -32,26 +53,8 @@ public class SupplyResource {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseFormatter> getAll() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody Supply entity) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> updateSupply(@Argument UUID id, @Argument Supply entity) {
         try {
             if (service.update(id, entity)) return responses.updated();
 
@@ -61,8 +64,8 @@ public class SupplyResource {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> deleteSupply(@Argument UUID id) {
         try {
             if(service.delete(id)) return responses.deleted();
 

@@ -5,15 +5,16 @@ import com.vitavault.vitavault.service.type.center.ICenterTypeService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.UUID;
 
 
-@RestController
-@RequestMapping(value = "/api/v3/type/center")
-@CrossOrigin(origins = "*")
+@Controller
 public class CenterTypeResource {
     @Autowired
     private ICenterTypeService service;
@@ -21,8 +22,28 @@ public class CenterTypeResource {
     @Autowired
     private CustomResponses responses;
 
-    @PostMapping
-    public ResponseEntity<ResponseFormatter> create(@RequestBody CenterType entity) {
+    //Queries
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getAllCenterType() {
+        try {
+            return responses.founded(service.getAll());
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+
+    @QueryMapping
+    public ResponseEntity<ResponseFormatter> getCenterType(@Argument UUID id) {
+        try {
+            return responses.founded(service.getByID(id));
+        } catch (Exception e) {
+            return responses.error(e);
+        }
+    }
+
+    //Mutations
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> createCenterType(@Argument CenterType entity) {
         try {
             if (service.create(entity)) return responses.created();
 
@@ -32,26 +53,8 @@ public class CenterTypeResource {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseFormatter> getAll() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> getByID(@PathVariable UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> update(@PathVariable UUID id, @RequestBody CenterType entity) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> updateCenterType(@Argument UUID id, @Argument CenterType entity) {
         try {
             if (service.update(id, entity)) return responses.updated();
 
@@ -61,8 +64,8 @@ public class CenterTypeResource {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseFormatter> delete(@PathVariable UUID id) {
+    @MutationMapping
+    public ResponseEntity<ResponseFormatter> deleteCenterType(@Argument UUID id) {
         try {
             if(service.delete(id)) return responses.deleted();
 
