@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public record InputUser(
         String password,
-        boolean active,
+        Boolean active,
         UUID center,
         UUID person,
         UUID role

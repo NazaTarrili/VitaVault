@@ -1,4 +1,4 @@
-package com.vitavault.vitavault.enums;
+package com.vitavault.vitavault.model.enums;
 
 public enum Gender {
     MALE,

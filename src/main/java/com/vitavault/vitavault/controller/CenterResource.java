@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.model.domain.Center;
+import com.vitavault.vitavault.model.input.InputCenter;
 import com.vitavault.vitavault.service.center.ICenterService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -25,53 +25,30 @@ public class CenterResource {
     //Queries
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getAllCenter() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getAll());
     }
 
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getCenter(@Argument UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getByID(id));
     }
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createCenter(@Argument Center input) {
-        try {
-            if (service.create(input)) return responses.created();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> createCenter(@Argument InputCenter input) {
+        service.create(input);
+        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateCenter(@Argument UUID id, @Argument Center input) {
-        try {
-            if (service.update(id, input)) return responses.updated();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> updateCenter(@Argument UUID id, @Argument InputCenter input) {
+        service.update(id, input);
+        return responses.updated();
     }
 
     @MutationMapping
     public ResponseEntity<ResponseFormatter> deleteCenter(@Argument UUID id) {
-        try {
-            if(service.delete(id)) return responses.deleted();
-
-            return responses.notFounded();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        service.delete(id);
+        return responses.deleted();
     }
 }

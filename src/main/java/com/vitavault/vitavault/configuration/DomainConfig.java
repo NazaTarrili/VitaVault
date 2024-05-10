@@ -13,7 +13,7 @@ import java.util.Optional;
 
 
 @Configuration
-@EntityScan("com.vitavault.vitavault.domain")
+@EntityScan("com.vitavault.vitavault.model.domain")
 @EnableJpaRepositories("com.vitavault.vitavault.repository")
 @EnableTransactionManagement
 @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider")

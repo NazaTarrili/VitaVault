@@ -3,6 +3,7 @@ package com.vitavault.vitavault.model.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.model.domain.base.BaseEntity;
+import com.vitavault.vitavault.model.enums.SubscriptionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,13 +34,12 @@ public class Center extends BaseEntity {
     @Column
     private LocalDateTime subscriptionEnd;
 
+    @Column(nullable = false)
+    private SubscriptionStatus subscriptionStatus;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", nullable = false, unique = true)
     private Address address;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_status_id", nullable = false)
-    private SubscriptionStatus subscriptionStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "center_type_id", nullable = false)

@@ -1,4 +1,4 @@
-package com.vitavault.vitavault.util;
+package com.vitavault.vitavault.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

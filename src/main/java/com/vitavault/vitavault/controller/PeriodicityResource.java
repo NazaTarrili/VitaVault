@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.model.domain.Periodicity;
+import com.vitavault.vitavault.model.input.InputPeriodicity;
 import com.vitavault.vitavault.service.periodicity.IPeriodicityService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -25,53 +25,30 @@ public class PeriodicityResource {
     //Queries
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getAllPeriodicity() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getAll());
     }
 
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getPeriodicity(@Argument UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getByID(id));
     }
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createPeriodicity(@Argument Periodicity input) {
-        try {
-            if (service.create(input)) return responses.created();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> createPeriodicity(@Argument InputPeriodicity input) {
+        service.create(input);
+        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updatePeriodicity(@Argument UUID id, @Argument Periodicity input) {
-        try {
-            if (service.update(id, input)) return responses.updated();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> updatePeriodicity(@Argument UUID id, @Argument InputPeriodicity input) {
+        service.update(id, input);
+        return responses.updated();
     }
 
     @MutationMapping
     public ResponseEntity<ResponseFormatter> deletePeriodicity(@Argument UUID id) {
-        try {
-            if(service.delete(id)) return responses.deleted();
-
-            return responses.notFounded();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        service.delete(id);
+        return responses.deleted();
     }
 }

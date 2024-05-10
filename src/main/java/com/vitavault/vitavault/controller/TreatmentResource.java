@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.controller;
 
-import com.vitavault.vitavault.model.domain.Treatment;
+import com.vitavault.vitavault.model.input.InputTreatment;
 import com.vitavault.vitavault.service.treatment.ITreatmentService;
 import com.vitavault.vitavault.util.responses.CustomResponses;
 import com.vitavault.vitavault.util.responses.ResponseFormatter;
@@ -25,53 +25,30 @@ public class TreatmentResource {
     //Queries
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getAllTreatment() {
-        try {
-            return responses.founded(service.getAll());
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getAll());
     }
 
     @QueryMapping
     public ResponseEntity<ResponseFormatter> getTreatment(@Argument UUID id) {
-        try {
-            return responses.founded(service.getByID(id));
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        return responses.founded(service.getByID(id));
     }
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createTreatment(@Argument Treatment input) {
-        try {
-            if (service.create(input)) return responses.created();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> createTreatment(@Argument InputTreatment input) {
+        service.create(input);
+        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateTreatment(@Argument UUID id, @Argument Treatment input) {
-        try {
-            if (service.update(id, input)) return responses.updated();
-
-            return responses.badRequest();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+    public ResponseEntity<ResponseFormatter> updateTreatment(@Argument UUID id, @Argument InputTreatment input) {
+        service.update(id, input);
+        return responses.updated();
     }
 
     @MutationMapping
     public ResponseEntity<ResponseFormatter> deleteTreatment(@Argument UUID id) {
-        try {
-            if(service.delete(id)) return responses.deleted();
-
-            return responses.notFounded();
-        } catch (Exception e) {
-            return responses.error(e);
-        }
+        service.delete(id);
+        return responses.deleted();
     }
 }

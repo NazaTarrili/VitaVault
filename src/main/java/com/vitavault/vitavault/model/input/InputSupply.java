@@ -5,9 +5,9 @@ import java.util.UUID;
 
 public record InputSupply(
         String name,
-        int stock,
+        Integer stock,
         String dueDate,
-        int minimalStock,
+        Integer minimalStock,
         List<UUID> suppliers,
         UUID supplyType
 ) {}

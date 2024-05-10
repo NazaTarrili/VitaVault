@@ -3,7 +3,7 @@ package com.vitavault.vitavault.model.input;
 import java.util.UUID;
 
 public record InputAddress(
-        int number,
+        Integer number,
         String floor,
         String department,
         UUID street,

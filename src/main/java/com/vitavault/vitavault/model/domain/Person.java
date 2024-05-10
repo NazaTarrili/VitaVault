@@ -2,8 +2,8 @@ package com.vitavault.vitavault.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.vitavault.vitavault.enums.Gender;
 import com.vitavault.vitavault.model.domain.base.BaseEntity;
+import com.vitavault.vitavault.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 

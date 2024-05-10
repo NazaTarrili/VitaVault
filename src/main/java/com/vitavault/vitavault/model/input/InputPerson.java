@@ -1,6 +1,6 @@
 package com.vitavault.vitavault.model.input;
 
-import com.vitavault.vitavault.enums.Gender;
+import com.vitavault.vitavault.model.enums.Gender;
 
 import java.util.UUID;
 
