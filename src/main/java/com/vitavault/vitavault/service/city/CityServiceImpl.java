@@ -20,9 +20,6 @@ public class CityServiceImpl extends BaseServiceImpl<City, CityRepository> imple
     private IValidateProperty validate;
 
     @Autowired
-    private CityRepository repository;
-
-    @Autowired
     private IStateService stateService;
 
     @Override

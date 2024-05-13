@@ -25,4 +25,8 @@ public class Country extends BaseEntity {
 
     @OneToMany(mappedBy = "country", fetch = FetchType.EAGER)
     private Set<State> states;
+
+    public Country(String name) {
+        this.name = name;
+    }
 }

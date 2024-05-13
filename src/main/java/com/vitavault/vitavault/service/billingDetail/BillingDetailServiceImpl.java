@@ -22,9 +22,6 @@ public class BillingDetailServiceImpl extends BaseServiceImpl<BillingDetail, Bil
     private IValidateProperty validate;
 
     @Autowired
-    private BillingDetailRepository repository;
-
-    @Autowired
     private IBankService bankService;
 
     @Autowired

@@ -22,9 +22,6 @@ public class AppointmentServiceImpl extends BaseServiceImpl<Appointment, Appoint
     private IValidateProperty validate;
 
     @Autowired
-    private AppointmentRepository repository;
-
-    @Autowired
     private IScheduleService scheduleService;
 
     @Autowired

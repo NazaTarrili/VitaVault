@@ -21,9 +21,6 @@ public class BedServiceImpl extends BaseServiceImpl<Bed, BedRepository> implemen
     private IValidateProperty validate;
 
     @Autowired
-    private BedRepository repository;
-
-    @Autowired
     private IBedStatusService bedStatusService;
 
     @Autowired

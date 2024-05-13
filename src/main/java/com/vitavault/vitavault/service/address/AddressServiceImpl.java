@@ -22,9 +22,6 @@ public class AddressServiceImpl extends BaseServiceImpl<Address, AddressReposito
     private IValidateProperty validate;
 
     @Autowired
-    private AddressRepository repository;
-
-    @Autowired
     private IStreetService streetService;
 
     @Autowired

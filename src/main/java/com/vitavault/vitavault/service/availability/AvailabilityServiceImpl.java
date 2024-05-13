@@ -20,9 +20,6 @@ public class AvailabilityServiceImpl extends BaseServiceImpl<Availability, Avail
     private IValidateProperty validate;
 
     @Autowired
-    private AvailabilityRepository repository;
-
-    @Autowired
     private IScheduleService scheduleService;
 
     @Override

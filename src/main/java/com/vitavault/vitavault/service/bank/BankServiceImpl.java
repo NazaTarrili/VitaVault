@@ -18,9 +18,6 @@ public class BankServiceImpl extends BaseServiceImpl<Bank, BankRepository> imple
     @Autowired
     private IValidateProperty validate;
 
-    @Autowired
-    private BankRepository repository;
-
     @Override
     public void create(InputBank input) {
         if (!validate.isNonEmptyString(input.name()))

@@ -23,9 +23,6 @@ public class CenterServiceImpl extends BaseServiceImpl<Center, CenterRepository>
     private IValidateProperty validate;
 
     @Autowired
-    private CenterRepository repository;
-
-    @Autowired
     private IAddressService addressService;
 
     @Autowired
