@@ -19,7 +19,7 @@ public class CustomResponses {
 
     public ResponseEntity<ResponseFormatter> updated () {
         ResponseFormatter response = ResponseFormatter.builder().message("¡Entity updated!").build();
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     public ResponseEntity<ResponseFormatter> deleted () {
