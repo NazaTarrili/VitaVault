@@ -4,6 +4,8 @@ import com.vitavault.vitavault.model.domain.Plan;
 import com.vitavault.vitavault.model.input.InputPlan;
 import com.vitavault.vitavault.repository.PlanRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
+import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,6 +13,9 @@ import java.util.UUID;
 
 @Service
 public class PlanServiceImpl extends BaseServiceImpl<Plan, PlanRepository> implements IPlanService {
+    @Autowired
+    private IValidateProperty validate;
+
     @Override
     public void create(InputPlan input) {
 

@@ -4,6 +4,8 @@ import com.vitavault.vitavault.model.domain.SocialWork;
 import com.vitavault.vitavault.model.input.InputSocialWork;
 import com.vitavault.vitavault.repository.SocialWorkRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
+import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,6 +13,9 @@ import java.util.UUID;
 
 @Service
 public class SocialWorkServiceImpl extends BaseServiceImpl<SocialWork, SocialWorkRepository> implements ISocialWorkService {
+    @Autowired
+    private IValidateProperty validate;
+
     @Override
     public void create(InputSocialWork input) {
 
