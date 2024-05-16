@@ -3,7 +3,6 @@ package com.vitavault.vitavault.model.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.model.domain.base.BaseEntity;
-import com.vitavault.vitavault.model.types.Password;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +18,7 @@ import java.util.Set;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User extends BaseEntity {
     @Column(nullable = false)
-    private Password password;
+    private String password;
 
     @Column(nullable = false)
     private Boolean active;

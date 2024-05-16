@@ -39,7 +39,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
 
         repository.save(
                 User.builder()
-                        .password(input.password())
+                        .password(input.password().getPassword())
                         .active(input.active())
                         .center(centerService.getByID(input.center()))
                         .person(personService.getByID(input.person()))
@@ -55,7 +55,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         User user = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isStrongPassword(input.password()))
-            user.setPassword(input.password());
+            user.setPassword(input.password().getPassword());
 
         if (validate.isBoolean(input.active()))
             user.setActive(input.active());

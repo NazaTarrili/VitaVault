@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Password {
-    private final String password;
+    private String password;
 }
