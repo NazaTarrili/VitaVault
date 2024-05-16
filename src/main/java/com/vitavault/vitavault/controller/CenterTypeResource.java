@@ -1,16 +1,15 @@
 package com.vitavault.vitavault.controller;
 
+import com.vitavault.vitavault.model.domain.CenterType;
 import com.vitavault.vitavault.model.input.InputCenterType;
 import com.vitavault.vitavault.service.type.center.ICenterTypeService;
-import com.vitavault.vitavault.util.responses.CustomResponses;
-import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -19,36 +18,30 @@ public class CenterTypeResource {
     @Autowired
     private ICenterTypeService service;
 
-    @Autowired
-    private CustomResponses responses;
-
     //Queries
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getAllCenterType() {
-        return responses.founded(service.getAll());
+    public List<CenterType> getAllCenterType() {
+        return service.getAll();
     }
 
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getCenterType(@Argument UUID id) {
-        return responses.founded(service.getByID(id));
+    public CenterType getCenterType(@Argument UUID id) {
+        return service.getByID(id);
     }
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createCenterType(@Argument InputCenterType input) {
+    public void createCenterType(@Argument InputCenterType input) {
         service.create(input);
-        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateCenterType(@Argument UUID id, @Argument InputCenterType input) {
+    public void updateCenterType(@Argument UUID id, @Argument InputCenterType input) {
         service.update(id, input);
-        return responses.updated();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> deleteCenterType(@Argument UUID id) {
+    public void deleteCenterType(@Argument UUID id) {
         service.delete(id);
-        return responses.deleted();
     }
 }

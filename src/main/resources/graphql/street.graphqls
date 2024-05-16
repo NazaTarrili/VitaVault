@@ -1,0 +1,20 @@
+type Street {
+    id: ID
+    name:String
+    addresses: [Address]
+}
+
+input InputStreet {
+    name:String!
+}
+
+extend type Query {
+    getAllStreet: [Street]
+    getStreet(id: ID!): Street
+}
+
+extend type Mutation {
+    createStreet(input: InputStreet!): Boolean
+    updateStreet(id: ID!, input: InputStreet!): Boolean
+    deleteStreet(id: ID!): Boolean
+}

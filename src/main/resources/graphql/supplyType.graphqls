@@ -1,0 +1,20 @@
+type SupplyType {
+    id: ID
+    name: String
+    supplies: [SupplyType]
+}
+
+input InputSupplyType {
+    name: String!
+}
+
+extend type Query {
+    getAllSupplyType: [SupplyType]
+    getSupplyType(id: ID!): SupplyType
+}
+
+extend type Mutation {
+    createSupplyType(input: InputSupplyType!): Boolean
+    updateSupplyType(id: ID!, input: InputSupplyType!): Boolean
+    deleteSupplyType(id: ID!): Boolean
+}

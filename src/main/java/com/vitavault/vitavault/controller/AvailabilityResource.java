@@ -1,16 +1,15 @@
 package com.vitavault.vitavault.controller;
 
+import com.vitavault.vitavault.model.domain.Availability;
 import com.vitavault.vitavault.model.input.InputAvailability;
 import com.vitavault.vitavault.service.availability.IAvailabilityService;
-import com.vitavault.vitavault.util.responses.CustomResponses;
-import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -19,36 +18,30 @@ public class AvailabilityResource {
     @Autowired
     private IAvailabilityService service;
 
-    @Autowired
-    private CustomResponses responses;
-
     //Queries
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getAllAvailability() {
-        return responses.founded(service.getAll());
+    public List<Availability> getAllAvailability() {
+        return service.getAll();
     }
 
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getAvailability(@Argument UUID id) {
-        return responses.founded(service.getByID(id));
+    public Availability getAvailability(@Argument UUID id) {
+        return service.getByID(id);
     }
 
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createAvailability(@Argument InputAvailability input) {
+    public void createAvailability(@Argument InputAvailability input) {
         service.create(input);
-        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateAvailability(@Argument UUID id, @Argument InputAvailability input) {
+    public void updateAvailability(@Argument UUID id, @Argument InputAvailability input) {
         service.update(id, input);
-        return responses.updated();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> deleteAvailability(@Argument UUID id) {
+    public void deleteAvailability(@Argument UUID id) {
         service.delete(id);
-        return responses.deleted();
     }
 }

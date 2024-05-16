@@ -1,0 +1,20 @@
+type DeliveryNoteType {
+    id: ID
+    name: String
+    deliveryNotes: [DeliveryNote]
+}
+
+input InputDeliveryNoteType {
+    name: String!
+}
+
+extend type Query {
+    getAllDeliveryNoteType: [DeliveryNoteType]
+    getDeliveryNoteType(id: ID!): DeliveryNoteType
+}
+
+extend type Mutation {
+    createDeliveryNoteType(input: InputDeliveryNoteType!): Boolean
+    updateDeliveryNoteType(id: ID!, input: InputDeliveryNoteType!): Boolean
+    deleteDeliveryNoteType(id: ID!): Boolean
+}

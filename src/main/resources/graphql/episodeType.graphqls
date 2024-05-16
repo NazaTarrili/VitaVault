@@ -1,0 +1,20 @@
+type EpisodeType {
+    id: ID
+    name: String
+    episodes: [Episode]
+}
+
+input InputEpisodeType {
+    name: String!
+}
+
+extend type Query {
+    getAllEpisodeType: [EpisodeType]
+    getEpisodeType(id: ID!): EpisodeType
+}
+
+extend type Mutation {
+    createEpisodeType(input: InputEpisodeType!): Boolean
+    updateEpisodeType(id: ID!, input: InputEpisodeType!): Boolean
+    deleteEpisodeType(id: ID!): Boolean
+}

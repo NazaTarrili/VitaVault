@@ -1,0 +1,20 @@
+type Country {
+    id: ID
+    name: String
+    states: [State]
+}
+
+input InputCountry {
+    name: String!
+}
+
+extend type Query {
+    getAllCountry: [Country]
+    getCountry(id: ID!): Country
+}
+
+extend type Mutation {
+    createCountry(input: InputCountry!): Boolean
+    updateCountry(id: ID!, input: InputCountry!): Boolean
+    deleteCountry(id: ID!): Boolean
+}

@@ -1,16 +1,15 @@
 package com.vitavault.vitavault.controller;
 
+import com.vitavault.vitavault.model.domain.EpisodeType;
 import com.vitavault.vitavault.model.input.InputEpisodeType;
 import com.vitavault.vitavault.service.type.episode.IEpisodeTypeService;
-import com.vitavault.vitavault.util.responses.CustomResponses;
-import com.vitavault.vitavault.util.responses.ResponseFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -18,37 +17,31 @@ import java.util.UUID;
 public class EpisodeTypeResource {
     @Autowired
     private IEpisodeTypeService service;
-
-    @Autowired
-    private CustomResponses responses;
     
     //Queries
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getAllEpisodeType() {
-        return responses.founded(service.getAll());
+    public List<EpisodeType> getAllEpisodeType() {
+        return service.getAll();
     }
 
     @QueryMapping
-    public ResponseEntity<ResponseFormatter> getEpisodeType(@Argument UUID id) {
-        return responses.founded(service.getByID(id));
+    public EpisodeType getEpisodeType(@Argument UUID id) {
+        return service.getByID(id);
     }
     
     //Mutations
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> createEpisodeType(@Argument InputEpisodeType input) {
+    public void createEpisodeType(@Argument InputEpisodeType input) {
         service.create(input);
-        return responses.created();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> updateEpisodeType(@Argument UUID id, @Argument InputEpisodeType input) {
+    public void updateEpisodeType(@Argument UUID id, @Argument InputEpisodeType input) {
         service.update(id, input);
-        return responses.updated();
     }
 
     @MutationMapping
-    public ResponseEntity<ResponseFormatter> deleteEpisodeType(@Argument UUID id) {
+    public void deleteEpisodeType(@Argument UUID id) {
         service.delete(id);
-        return responses.deleted();
     }
 }

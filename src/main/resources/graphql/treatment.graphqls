@@ -1,0 +1,19 @@
+type Treatment {
+    id: ID
+    name: String
+}
+
+input InputTreatment {
+    name: String!
+}
+
+extend type Query {
+    getAllTreatment: [Treatment]
+    getTreatment(id: ID!): Treatment
+}
+
+extend type Mutation {
+    createTreatment(input: InputTreatment!): Boolean
+    updateTreatment(id: ID!, input: InputTreatment!): Boolean
+    deleteTreatment(id: ID!): Boolean
+}

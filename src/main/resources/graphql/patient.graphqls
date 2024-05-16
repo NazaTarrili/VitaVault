@@ -1,0 +1,23 @@
+type Patient {
+    id: ID
+    appointments: [Appointment]
+    episodes: [Episode]
+    person: Person
+    plan: Plan
+}
+
+input InputPatient {
+    person: ID!
+    plan: ID!
+}
+
+extend type Query {
+    getAllPatient: [Patient]
+    getPatient(id: ID!): Patient
+}
+
+extend type Mutation {
+    createPatient(input: InputPatient!): Boolean
+    updatePatient(id: ID!, input: InputPatient!): Boolean
+    deletePatient(id: ID!): Boolean
+}

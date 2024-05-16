@@ -1,0 +1,20 @@
+type DetailStatus {
+    id: ID
+    name: String
+    episodeDetails: [EpisodeDetail]
+}
+
+input InputDetailStatus {
+    name: String!
+}
+
+extend type Query {
+    getAllDetailStatus: [DetailStatus]
+    getDetailStatus(id: ID!): DetailStatus
+}
+
+extend type Mutation {
+    createDetailStatus(input: InputDetailStatus!): Boolean
+    updateDetailStatus(id: ID!, input: InputDetailStatus!): Boolean
+    deleteDetailStatus(id: ID!): Boolean
+}

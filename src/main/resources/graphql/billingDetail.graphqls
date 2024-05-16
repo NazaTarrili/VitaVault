@@ -1,0 +1,35 @@
+type BillingDetail {
+    id: ID
+    taxIdentifier: String
+    email: String
+    accountNumber: String
+    reference: String
+    iban: String
+    phoneNumber: String
+    bank: Bank
+    person: Person
+    address: Address
+}
+
+input InputBillingDetail {
+    taxIdentifier: String!
+    email: String!
+    accountNumber: String!
+    reference: String
+    iban: String!
+    phoneNumber: String!
+    bank: ID!
+    person: ID!
+    address: ID!
+}
+
+extend type Query {
+    getAllBillingDetail: [BillingDetail]
+    getBillingDetail(id: ID!): BillingDetail
+}
+
+extend type Mutation {
+    createBillingDetail(input: InputBillingDetail!): Boolean
+    updateBillingDetail(id: ID!, input: InputBillingDetail!): Boolean
+    deleteBillingDetail(id: ID!): Boolean
+}

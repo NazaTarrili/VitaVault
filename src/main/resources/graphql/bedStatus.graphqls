@@ -1,0 +1,20 @@
+type BedStatus {
+    id: ID
+    name: String
+    beds: [Bed]
+}
+
+input InputBedStatus {
+    name: String!
+}
+
+extend type Query {
+    getAllBedStatus: [BedStatus]
+    getBedStatus(id: ID!): BedStatus
+}
+
+extend type Mutation {
+    createBedStatus(input: InputBedStatus!): Boolean
+    updateBedStatus(id: ID!, input: InputBedStatus!): Boolean
+    deleteBedStatus(id: ID!): Boolean
+}

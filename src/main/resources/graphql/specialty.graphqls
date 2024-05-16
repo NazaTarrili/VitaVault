@@ -1,0 +1,20 @@
+type Specialty {
+    id: ID
+    name: String
+    schedules: [Schedule]
+}
+
+input InputSpecialty {
+    name: String!
+}
+
+extend type Query {
+    getAllSpecialty: [Specialty]
+    getSpecialty(id: ID!): Specialty
+}
+
+extend type Mutation {
+    createSpecialty(input: InputSpecialty!): Boolean
+    updateSpecialty(id: ID!, input: InputSpecialty!): Boolean
+    deleteSpecialty(id: ID!): Boolean
+}

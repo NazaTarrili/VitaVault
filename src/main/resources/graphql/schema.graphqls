@@ -1,0 +1,12 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    _dummy: Boolean
+}
+
+type Mutation {
+    _dummy: Boolean
+}

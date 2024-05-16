@@ -1,0 +1,31 @@
+type Supply {
+    id: ID
+    name: String
+    stock: Int
+    dueDate: String
+    minimalStock: Int
+    deliveryNotes: [DeliveryNote]
+    suppliers: [Supplier]
+    supplyType: SupplyType
+    episodeDetails: [EpisodeDetail]
+}
+
+input InputSupply {
+    name: String!
+    stock: Int!
+    dueDate: String!
+    minimalStock: Int!
+    suppliers: [ID]!
+    supplyType: ID!
+}
+
+extend type Query {
+    getAllSupply: [Supply]
+    getSupply(id: ID!): Supply
+}
+
+extend type Mutation {
+    createSupply(input: InputSupply!): Boolean
+    updateSupply(id: ID!, input: InputSupply!): Boolean
+    deleteSupply(id: ID!): Boolean
+}

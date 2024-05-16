@@ -1,0 +1,21 @@
+type SocialWork {
+    id: ID
+    name: String
+    address: Address
+}
+
+input InputSocialWork {
+    name: String!
+    address: ID!
+}
+
+extend type Query {
+    getAllSocialWork: [SocialWork]
+    getSocialWork(id: ID!): SocialWork
+}
+
+extend type Mutation {
+    createSocialWork(input: InputSocialWork!): Boolean
+    updateSocialWork(id: ID!, input: InputSocialWork!): Boolean
+    deleteSocialWork(id: ID!): Boolean
+}

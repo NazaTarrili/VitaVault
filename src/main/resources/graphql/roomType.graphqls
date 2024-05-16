@@ -1,0 +1,20 @@
+type RoomType {
+    id: ID
+    name: String
+    rooms: [RoomType]
+}
+
+input InputRoomType {
+    name: String!
+}
+
+extend type Query {
+    getAllRoomType: [RoomType]
+    getRoomType(id: ID!): RoomType
+}
+
+extend type Mutation {
+    createRoomType(input: InputRoomType!): Boolean
+    updateRoomType(id: ID!, input: InputRoomType!): Boolean
+    deleteRoomType(id: ID!): Boolean
+}

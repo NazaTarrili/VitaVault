@@ -1,0 +1,22 @@
+type City {
+    id: ID
+    name: String
+    state: State
+    addresses: [Address]
+}
+
+input InputCity {
+    name: String!
+    state: ID!
+}
+
+extend type Query {
+    getAllCity: [City]
+    getCity(id: ID!): City
+}
+
+extend type Mutation {
+    createCity(input: InputCity!): Boolean
+    updateCity(id: ID!, input: InputCity!): Boolean
+    deleteCity(id: ID!): Boolean
+}
