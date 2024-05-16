@@ -1,13 +1,11 @@
 package com.vitavault.vitavault.service.city;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.City;
 import com.vitavault.vitavault.model.input.InputCity;
 import com.vitavault.vitavault.repository.CityRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.state.IStateService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +14,17 @@ import java.util.UUID;
 
 @Service
 public class CityServiceImpl extends BaseServiceImpl<City, CityRepository> implements ICityService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = City.class.getName();
 
     @Autowired
     private IStateService stateService;
 
     @Override
     public void create(InputCity input) {
-        if (!validate.isNonEmptyString(input.name()))
-            throw new InvalidRequestException("City: name is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isUUID(input.state()))
-            throw new InvalidRequestException("City: state is required.");
+        requestValidator.invalidRequest(new Property("name", input.name()), className);
+        requestValidator.invalidRequest(new Property("state", input.state()), className);
 
         repository.save(
                 City.builder()
@@ -40,8 +36,9 @@ public class CityServiceImpl extends BaseServiceImpl<City, CityRepository> imple
 
     @Override
     public void update(UUID id, InputCity input) {
-        City city = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("City: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        City city = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.name()))
             city.setName(input.name());

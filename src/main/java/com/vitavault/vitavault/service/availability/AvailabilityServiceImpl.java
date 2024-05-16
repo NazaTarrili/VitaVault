@@ -1,13 +1,11 @@
 package com.vitavault.vitavault.service.availability;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.Availability;
 import com.vitavault.vitavault.model.input.InputAvailability;
 import com.vitavault.vitavault.repository.AvailabilityRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.schedule.IScheduleService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,25 +14,19 @@ import java.util.UUID;
 
 @Service
 public class AvailabilityServiceImpl extends BaseServiceImpl<Availability, AvailabilityRepository> implements IAvailabilityService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = Availability.class.getName();
 
     @Autowired
     private IScheduleService scheduleService;
 
     @Override
     public void create(InputAvailability input) {
-        if (!validate.isLocalDate(input.day()))
-            throw new InvalidRequestException("Availability: day is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isLocalTime(input.start()))
-            throw new InvalidRequestException("Availability: start is required.");
-
-        if (!validate.isLocalTime(input.end()))
-            throw new InvalidRequestException("Availability: end is required.");
-
-        if (!validate.isUUID(input.schedule()))
-            throw new InvalidRequestException("Availability: schedule is required.");
+        requestValidator.invalidRequest(new Property("day", input.day()), className);
+        requestValidator.invalidRequest(new Property("start", input.start()), className);
+        requestValidator.invalidRequest(new Property("end", input.end()), className);
+        requestValidator.invalidRequest(new Property("schedule", input.schedule()), className);
 
         repository.save(
                 Availability.builder()
@@ -48,8 +40,9 @@ public class AvailabilityServiceImpl extends BaseServiceImpl<Availability, Avail
 
     @Override
     public void update(UUID id, InputAvailability input) {
-        Availability availability = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Availability: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        Availability availability = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isLocalDate(input.day()))
             availability.setDay(input.day());

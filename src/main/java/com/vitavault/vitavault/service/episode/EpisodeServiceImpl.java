@@ -1,14 +1,12 @@
 package com.vitavault.vitavault.service.episode;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.Episode;
 import com.vitavault.vitavault.model.input.InputEpisode;
 import com.vitavault.vitavault.repository.EpisodeRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.patient.IPatientService;
 import com.vitavault.vitavault.service.type.episode.IEpisodeTypeService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,7 @@ import java.util.UUID;
 
 @Service
 public class EpisodeServiceImpl extends BaseServiceImpl<Episode, EpisodeRepository> implements IEpisodeService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = Episode.class.getName();
 
     @Autowired
     private IEpisodeTypeService episodeTypeService;
@@ -28,17 +25,12 @@ public class EpisodeServiceImpl extends BaseServiceImpl<Episode, EpisodeReposito
 
     @Override
     public void create(InputEpisode input) {
-        if (!validate.isNonEmptyString(input.name()))
-            throw new InvalidRequestException("Episode: name is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isLocalDateTime(input.date()))
-            throw new InvalidRequestException("Episode: date is required.");
-
-        if (!validate.isUUID(input.episodeType()))
-            throw new InvalidRequestException("Episode: episode type is required.");
-
-        if (!validate.isUUID(input.patient()))
-            throw new InvalidRequestException("Episode: patient is required.");
+        requestValidator.invalidRequest(new Property("name", input.name()), className);
+        requestValidator.invalidRequest(new Property("date", input.date()), className);
+        requestValidator.invalidRequest(new Property("episode type", input.episodeType()), className);
+        requestValidator.invalidRequest(new Property("patient", input.patient()), className);
 
         repository.save(
                 Episode.builder()
@@ -52,8 +44,9 @@ public class EpisodeServiceImpl extends BaseServiceImpl<Episode, EpisodeReposito
 
     @Override
     public void update(UUID id, InputEpisode input) {
-        Episode episode = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Episode: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        Episode episode = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.name()))
             episode.setName(input.name());

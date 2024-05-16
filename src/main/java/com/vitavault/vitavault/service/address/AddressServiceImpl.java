@@ -1,14 +1,12 @@
 package com.vitavault.vitavault.service.address;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.Address;
 import com.vitavault.vitavault.model.input.InputAddress;
 import com.vitavault.vitavault.repository.AddressRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.city.ICityService;
 import com.vitavault.vitavault.service.street.IStreetService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +16,7 @@ import java.util.UUID;
 
 @Service
 public class AddressServiceImpl extends BaseServiceImpl<Address, AddressRepository> implements IAddressService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = Address.class.getName();
 
     @Autowired
     private IStreetService streetService;
@@ -30,11 +27,10 @@ public class AddressServiceImpl extends BaseServiceImpl<Address, AddressReposito
     @Override
     @Transactional
     public void create(InputAddress input) {
-        if (!validate.isUUID(input.street()))
-            throw new InvalidRequestException("Address: street is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isUUID(input.city()))
-            throw new InvalidRequestException("Address: city is required.");
+        requestValidator.invalidRequest(new Property("street", input.street()), className);
+        requestValidator.invalidRequest(new Property("city", input.city()), className);
 
         repository.save(
                 Address.builder()
@@ -50,8 +46,9 @@ public class AddressServiceImpl extends BaseServiceImpl<Address, AddressReposito
     @Override
     @Transactional
     public void update(UUID id, InputAddress input) {
-        Address address = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Address: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        Address address = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isInteger(input.number()))
             address.setNumber(input.number());

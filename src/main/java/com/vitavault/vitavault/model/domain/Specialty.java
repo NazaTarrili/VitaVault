@@ -24,4 +24,8 @@ public class Specialty extends BaseEntity {
 
     @OneToMany(mappedBy = "speciality")
     private Set<Schedule> schedules;
+
+    public Specialty(String name) {
+        this.name = name;
+    }
 }

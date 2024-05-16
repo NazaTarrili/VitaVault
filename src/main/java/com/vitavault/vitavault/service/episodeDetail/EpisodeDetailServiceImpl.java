@@ -1,7 +1,5 @@
 package com.vitavault.vitavault.service.episodeDetail;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.EpisodeDetail;
 import com.vitavault.vitavault.model.domain.Supply;
 import com.vitavault.vitavault.model.domain.User;
@@ -14,7 +12,7 @@ import com.vitavault.vitavault.service.status.detail.IDetailStatusService;
 import com.vitavault.vitavault.service.supply.ISupplyService;
 import com.vitavault.vitavault.service.treatment.ITreatmentService;
 import com.vitavault.vitavault.service.user.IUserService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class EpisodeDetailServiceImpl extends BaseServiceImpl<EpisodeDetail, EpisodeDetailRepository> implements IEpisodeDetailService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = EpisodeDetail.class.getName();
 
     @Autowired
     private IBedService bedService;
@@ -48,20 +45,13 @@ public class EpisodeDetailServiceImpl extends BaseServiceImpl<EpisodeDetail, Epi
 
     @Override
     public void create(InputEpisodeDetail input) {
-        if (!validate.isNonEmptyString(input.note()))
-            throw new InvalidRequestException("Episode detail: note is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isUUID(input.treatment()))
-            throw new InvalidRequestException("Episode detail: treatment is required.");
-
-        if (!validate.isNonEmptyUUIDList(input.users()))
-            throw new InvalidRequestException("Episode detail: users are required.");
-
-        if (!validate.isUUID(input.episodeDetailStatus()))
-            throw new InvalidRequestException("Episode detail: episode detail status is required.");
-
-        if (!validate.isUUID(input.episode()))
-            throw new InvalidRequestException("Episode detail: episode is required.");
+        requestValidator.invalidRequest(new Property("note", input.note()), className);
+        requestValidator.invalidRequest(new Property("treatment", input.treatment()), className);
+        requestValidator.invalidRequest(new Property("users", input.users()), className);
+        requestValidator.invalidRequest(new Property("episode detail status", input.episodeDetailStatus()), className);
+        requestValidator.invalidRequest(new Property("episode", input.episode()), className);
 
         Set<Supply> supplies = input.supplies().stream().map(supplyService::getByID).collect(Collectors.toSet());
 
@@ -83,8 +73,9 @@ public class EpisodeDetailServiceImpl extends BaseServiceImpl<EpisodeDetail, Epi
 
     @Override
     public void update(UUID id, InputEpisodeDetail input) {
-        EpisodeDetail episodeDetail = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Episode detail: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        EpisodeDetail episodeDetail = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.note()))
             episodeDetail.setNote(input.note());

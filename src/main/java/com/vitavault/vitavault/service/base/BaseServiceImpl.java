@@ -1,8 +1,9 @@
 package com.vitavault.vitavault.service.base;
 
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.base.BaseEntity;
 import com.vitavault.vitavault.repository.base.BaseRepository;
+import com.vitavault.vitavault.util.exceptionFactory.IExceptionFactory;
+import com.vitavault.vitavault.util.genericInvalidRequestValidator.IInvalidRequestValidator;
 import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +16,21 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     protected R repository;
 
     @Autowired
-    private IValidateProperty validate;
+    protected IValidateProperty validate;
+
+    @Autowired
+    protected IExceptionFactory exceptionFactory;
+
+    @Autowired
+    protected IInvalidRequestValidator requestValidator;
 
     @Override
     @Transactional(readOnly = true)
     public List<E> getAll() {
         List<E> entityList = (List<E>) repository.findAll();
+
         if (!validate.isNonEmptyEntityList(entityList))
-            throw new NotFoundException("Not found entities.");
+            exceptionFactory.throwEmptyList();
 
         return entityList;
     }
@@ -30,7 +38,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
     @Override
     @Transactional(readOnly = true)
     public E getByID(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Not exists an entity with this ID."));
+        return repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound());
     }
 
     @Override
@@ -39,6 +47,6 @@ public abstract class BaseServiceImpl<E extends BaseEntity, R extends BaseReposi
         if (repository.existsById(id))
             repository.deleteById(id);
 
-        throw new NotFoundException("Not exists an entity with this ID.");
+        exceptionFactory.throwNotFound();
     }
 }

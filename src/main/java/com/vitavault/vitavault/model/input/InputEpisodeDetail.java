@@ -1,5 +1,7 @@
 package com.vitavault.vitavault.model.input;
 
+import com.vitavault.vitavault.model.input.base.BaseInput;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -13,4 +15,16 @@ public record InputEpisodeDetail(
         List<UUID> users,
         UUID episodeDetailStatus,
         UUID episode
-) {}
+) implements BaseInput {
+    @Override
+    public boolean hasData() {
+        return note != null ||
+                date != null ||
+                bed != null ||
+                treatment != null ||
+                supplies != null ||
+                users != null ||
+                episodeDetailStatus != null ||
+                episode != null;
+    }
+}

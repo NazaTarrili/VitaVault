@@ -1,14 +1,12 @@
 package com.vitavault.vitavault.service.bed;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.Bed;
 import com.vitavault.vitavault.model.input.InputBed;
 import com.vitavault.vitavault.repository.BedRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.room.IRoomService;
 import com.vitavault.vitavault.service.status.bed.IBedStatusService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,7 @@ import java.util.UUID;
 
 @Service
 public class BedServiceImpl extends BaseServiceImpl<Bed, BedRepository> implements IBedService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = Bed.class.getName();
 
     @Autowired
     private IBedStatusService bedStatusService;
@@ -28,14 +25,11 @@ public class BedServiceImpl extends BaseServiceImpl<Bed, BedRepository> implemen
 
     @Override
     public void create(InputBed input) {
-        if (!validate.isNonEmptyString(input.name()))
-            throw new InvalidRequestException("Bed: name is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isUUID(input.bedStatus()))
-            throw new InvalidRequestException("Bed: bed status is required.");
-
-        if (!validate.isUUID(input.room()))
-            throw new InvalidRequestException("Bed: room is required.");
+        requestValidator.invalidRequest(new Property("name", input.name()), className);
+        requestValidator.invalidRequest(new Property("bed status", input.bedStatus()), className);
+        requestValidator.invalidRequest(new Property("room", input.room()), className);
 
         repository.save(
                 Bed.builder()
@@ -48,8 +42,9 @@ public class BedServiceImpl extends BaseServiceImpl<Bed, BedRepository> implemen
 
     @Override
     public void update(UUID id, InputBed input) {
-        Bed bed = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Bed: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        Bed bed = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.name()))
             bed.setName(input.name());

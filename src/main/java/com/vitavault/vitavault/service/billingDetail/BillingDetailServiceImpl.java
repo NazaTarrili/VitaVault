@@ -1,7 +1,5 @@
 package com.vitavault.vitavault.service.billingDetail;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.BillingDetail;
 import com.vitavault.vitavault.model.input.InputBillingDetail;
 import com.vitavault.vitavault.repository.BillingDetailRepository;
@@ -9,7 +7,7 @@ import com.vitavault.vitavault.service.address.IAddressService;
 import com.vitavault.vitavault.service.bank.IBankService;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.person.IPersonService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,7 @@ import java.util.UUID;
 
 @Service
 public class BillingDetailServiceImpl extends BaseServiceImpl<BillingDetail, BillingDetailRepository> implements IBillingDetailService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = BillingDetail.class.getName();
 
     @Autowired
     private IBankService bankService;
@@ -32,29 +29,16 @@ public class BillingDetailServiceImpl extends BaseServiceImpl<BillingDetail, Bil
 
     @Override
     public void create(InputBillingDetail input) {
-        if (!validate.isNonEmptyString(input.taxIdentifier()))
-            throw new InvalidRequestException("BillingDetail: tax identifier is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isNonEmptyString(input.email()))
-            throw new InvalidRequestException("BillingDetail: email is required.");
-
-        if (!validate.isNonEmptyString(input.accountNumber()))
-            throw new InvalidRequestException("BillingDetail: account number is required.");
-
-        if (!validate.isNonEmptyString(input.iban()))
-            throw new InvalidRequestException("BillingDetail: iban is required.");
-
-        if (!validate.isNonEmptyString(input.phoneNumber()))
-            throw new InvalidRequestException("BillingDetail: phone number is required.");
-
-        if (!validate.isUUID(input.bank()))
-            throw new InvalidRequestException("BillingDetail: bank is required.");
-
-        if (!validate.isUUID(input.person()))
-            throw new InvalidRequestException("BillingDetail: person is required.");
-
-        if (!validate.isUUID(input.address()))
-            throw new InvalidRequestException("BillingDetail: address is required.");
+        requestValidator.invalidRequest(new Property("tax identifier", input.taxIdentifier()), className);
+        requestValidator.invalidRequest(new Property("email", input.email()), className);
+        requestValidator.invalidRequest(new Property("account number", input.accountNumber()), className);
+        requestValidator.invalidRequest(new Property("iban", input.iban()), className);
+        requestValidator.invalidRequest(new Property("phone number", input.phoneNumber()), className);
+        requestValidator.invalidRequest(new Property("bank", input.bank()), className);
+        requestValidator.invalidRequest(new Property("person", input.person()), className);
+        requestValidator.invalidRequest(new Property("address", input.address()), className);
 
         repository.save(
                 BillingDetail.builder()
@@ -73,8 +57,9 @@ public class BillingDetailServiceImpl extends BaseServiceImpl<BillingDetail, Bil
 
     @Override
     public void update(UUID id, InputBillingDetail input) {
-        BillingDetail billingDetail = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("BillingDetail: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        BillingDetail billingDetail = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.taxIdentifier()))
             billingDetail.setTaxIdentifier(input.taxIdentifier());

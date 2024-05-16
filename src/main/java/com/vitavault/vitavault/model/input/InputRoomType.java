@@ -1,3 +1,10 @@
 package com.vitavault.vitavault.model.input;
 
-public record InputRoomType(String name) {}
+import com.vitavault.vitavault.model.input.base.BaseInput;
+
+public record InputRoomType(String name) implements BaseInput {
+    @Override
+    public boolean hasData() {
+        return name != null;
+    }
+}

@@ -24,4 +24,8 @@ public class BedStatus extends BaseEntity {
 
     @OneToMany(mappedBy = "bedStatus")
     private Set<Bed> beds;
+
+    public BedStatus(String name) {
+        this.name = name;
+    }
 }

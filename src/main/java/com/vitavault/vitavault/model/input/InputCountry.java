@@ -1,5 +1,10 @@
 package com.vitavault.vitavault.model.input;
 
-public record InputCountry(
-        String name
-) {}
+import com.vitavault.vitavault.model.input.base.BaseInput;
+
+public record InputCountry(String name) implements BaseInput {
+    @Override
+    public boolean hasData() {
+        return name != null;
+    }
+}

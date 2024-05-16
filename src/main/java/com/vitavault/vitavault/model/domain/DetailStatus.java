@@ -24,4 +24,8 @@ public class DetailStatus extends BaseEntity {
 
     @OneToMany(mappedBy = "episodeDetailStatus")
     private Set<EpisodeDetail> episodeDetails;
+
+    public DetailStatus(String name) {
+        this.name = name;
+    }
 }

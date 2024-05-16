@@ -24,4 +24,8 @@ public class SupplyType extends BaseEntity {
 
     @OneToMany(mappedBy = "supplyType")
     private Set<Supply> supplies;
+
+    public SupplyType(String name) {
+        this.name = name;
+    }
 }

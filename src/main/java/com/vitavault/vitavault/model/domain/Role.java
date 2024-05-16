@@ -26,4 +26,8 @@ public class Role extends BaseEntity {
 
     @OneToMany(mappedBy = "role")
     private Set<User> users;
+
+    public Role(String name) {
+        this.name = name;
+    }
 }

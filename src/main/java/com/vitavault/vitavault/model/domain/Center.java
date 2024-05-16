@@ -3,7 +3,7 @@ package com.vitavault.vitavault.model.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.vitavault.vitavault.model.domain.base.BaseEntity;
-import com.vitavault.vitavault.model.enums.SubscriptionStatus;
+import com.vitavault.vitavault.model.types.SubscriptionStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

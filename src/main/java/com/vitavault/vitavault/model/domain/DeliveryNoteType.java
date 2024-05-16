@@ -24,4 +24,8 @@ public class DeliveryNoteType extends BaseEntity {
 
     @OneToMany(mappedBy = "deliveryNoteType")
     private Set<DeliveryNote> deliveryNotes;
+
+    public DeliveryNoteType(String name) {
+        this.name = name;
+    }
 }

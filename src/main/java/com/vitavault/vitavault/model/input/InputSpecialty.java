@@ -1,3 +1,10 @@
 package com.vitavault.vitavault.model.input;
 
-public record InputSpecialty(String name) {}
+import com.vitavault.vitavault.model.input.base.BaseInput;
+
+public record InputSpecialty(String name) implements BaseInput {
+    @Override
+    public boolean hasData() {
+        return name != null;
+    }
+}

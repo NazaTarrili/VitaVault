@@ -24,4 +24,8 @@ public class EpisodeType extends BaseEntity {
 
     @OneToMany(mappedBy = "episodeType")
     private Set<Episode> episodes;
+
+    public EpisodeType(String name) {
+        this.name = name;
+    }
 }

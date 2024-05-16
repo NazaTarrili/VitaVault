@@ -1,13 +1,10 @@
 package com.vitavault.vitavault.service.bank;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.Bank;
 import com.vitavault.vitavault.model.input.InputBank;
 import com.vitavault.vitavault.repository.BankRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -15,21 +12,22 @@ import java.util.UUID;
 
 @Service
 public class BankServiceImpl extends BaseServiceImpl<Bank, BankRepository> implements IBankService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = Bank.class.getName();
 
     @Override
     public void create(InputBank input) {
-        if (!validate.isNonEmptyString(input.name()))
-            throw new InvalidRequestException("Bank: name is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        requestValidator.invalidRequest(new Property("name", input.name()), className);
 
         repository.save(new Bank(input.name()));
     }
 
     @Override
     public void update(UUID id, InputBank input) {
-        Bank bank = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Bank: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        Bank bank = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isNonEmptyString(input.name()))
             bank.setName(input.name());

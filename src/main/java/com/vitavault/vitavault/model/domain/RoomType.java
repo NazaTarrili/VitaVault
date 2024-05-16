@@ -24,4 +24,8 @@ public class RoomType extends BaseEntity {
 
     @OneToMany(mappedBy = "roomType")
     private Set<Room> rooms;
+
+    public RoomType(String name) {
+        this.name = name;
+    }
 }

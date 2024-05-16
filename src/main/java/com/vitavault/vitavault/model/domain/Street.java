@@ -24,4 +24,8 @@ public class Street extends BaseEntity {
 
     @OneToMany(mappedBy = "street")
     private Set<Address> addresses;
+
+    public Street(String name) {
+        this.name = name;
+    }
 }

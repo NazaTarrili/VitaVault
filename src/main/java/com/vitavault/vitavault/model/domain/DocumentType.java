@@ -24,4 +24,8 @@ public class DocumentType extends BaseEntity {
 
     @OneToMany(mappedBy = "documentType")
     private Set<Person> people;
+
+    public DocumentType(String name) {
+        this.name = name;
+    }
 }

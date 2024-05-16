@@ -1,13 +1,26 @@
 package com.vitavault.vitavault.model.input;
 
-import java.util.List;
+import com.vitavault.vitavault.model.input.base.BaseInput;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 public record InputSupply(
         String name,
         Integer stock,
-        String dueDate,
+        LocalDateTime dueDate,
         Integer minimalStock,
-        List<UUID> suppliers,
+        Set<UUID> suppliers,
         UUID supplyType
-) {}
+) implements BaseInput {
+    @Override
+    public boolean hasData() {
+        return name != null ||
+                stock != null ||
+                dueDate != null ||
+                minimalStock != null ||
+                suppliers != null ||
+                supplyType != null;
+    }
+}

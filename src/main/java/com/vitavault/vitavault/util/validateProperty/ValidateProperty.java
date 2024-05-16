@@ -1,5 +1,7 @@
 package com.vitavault.vitavault.util.validateProperty;
 
+import com.vitavault.vitavault.model.types.Gender;
+import com.vitavault.vitavault.model.types.Password;
 import org.springframework.stereotype.Component;
 
 import java.time.DayOfWeek;
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Component
@@ -24,6 +27,11 @@ public class ValidateProperty implements IValidateProperty {
         return list != null && !list.isEmpty() && list.stream().allMatch(Objects::nonNull);
     }
 
+    @Override
+    public Boolean isNonEmptyUUIDSet(Set<UUID> list) {
+        return list != null && !list.isEmpty() && list.stream().allMatch(Objects::nonNull);
+    }
+
     public Boolean isNonEmptyEntityList(List<?> list) {
         return list != null && !list.isEmpty();
     }
@@ -34,6 +42,10 @@ public class ValidateProperty implements IValidateProperty {
 
     public Boolean isDayOfWeek(DayOfWeek day) {
         return day != null;
+    }
+
+    public Boolean isGender(Gender gender) {
+        return gender != null;
     }
 
     public Boolean isLocalTime(LocalTime time) {
@@ -52,11 +64,16 @@ public class ValidateProperty implements IValidateProperty {
         return bool != null;
     }
 
-    public Boolean isStrongPassword(String pass) {
-        return pass != null &&
-                pass.length() >= 8 &&
-                pass.matches(".*[A-Z].*") &&
-                pass.matches(".*[a-z].*") &&
-                pass.matches(".*\\d.*");
+    @Override
+    public Boolean isFloat(Float fl) {
+        return fl != null && !fl.isInfinite() && !fl.isNaN();
+    }
+
+    public Boolean isStrongPassword(Password pass) {
+        return pass.getPassword() != null &&
+                pass.getPassword().length() >= 8 &&
+                pass.getPassword().matches(".*[A-Z].*") &&
+                pass.getPassword().matches(".*[a-z].*") &&
+                pass.getPassword().matches(".*\\d.*");
     }
 }

@@ -1,14 +1,12 @@
 package com.vitavault.vitavault.service.deliveryNote;
 
-import com.vitavault.vitavault.exception.InvalidRequestException;
-import com.vitavault.vitavault.exception.NotFoundException;
 import com.vitavault.vitavault.model.domain.DeliveryNote;
 import com.vitavault.vitavault.model.input.InputDeliveryNote;
 import com.vitavault.vitavault.repository.DeliveryNoteRepository;
 import com.vitavault.vitavault.service.base.BaseServiceImpl;
 import com.vitavault.vitavault.service.supply.ISupplyService;
 import com.vitavault.vitavault.service.type.deliveryNote.IDeliveryNoteTypeService;
-import com.vitavault.vitavault.util.validateProperty.IValidateProperty;
+import com.vitavault.vitavault.util.exceptionFactory.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,7 @@ import java.util.UUID;
 
 @Service
 public class DeliveryNoteServiceImpl extends BaseServiceImpl<DeliveryNote, DeliveryNoteRepository> implements IDeliveryNoteService {
-    @Autowired
-    private IValidateProperty validate;
+    private final String className = DeliveryNote.class.getName();
 
     @Autowired
     private IDeliveryNoteTypeService deliveryNoteTypeService;
@@ -28,17 +25,12 @@ public class DeliveryNoteServiceImpl extends BaseServiceImpl<DeliveryNote, Deliv
 
     @Override
     public void create(InputDeliveryNote input) {
-        if (!validate.isLocalDateTime(input.date()))
-            throw new InvalidRequestException("Delivery note: date is required.");
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
 
-        if (!validate.isInteger(input.quantity()))
-            throw new InvalidRequestException("Delivery note: quantity is required.");
-
-        if (!validate.isUUID(input.deliveryNoteType()))
-            throw new InvalidRequestException("Delivery note: delivery note type is required.");
-
-        if (!validate.isUUID(input.supply()))
-            throw new InvalidRequestException("Delivery note: supply is required.");
+        requestValidator.invalidRequest(new Property("date", input.date()), className);
+        requestValidator.invalidRequest(new Property("quantity", input.quantity()), className);
+        requestValidator.invalidRequest(new Property("delivery note type", input.deliveryNoteType()), className);
+        requestValidator.invalidRequest(new Property("supply", input.supply()), className);
 
         repository.save(
                 DeliveryNote.builder()
@@ -52,8 +44,9 @@ public class DeliveryNoteServiceImpl extends BaseServiceImpl<DeliveryNote, Deliv
 
     @Override
     public void update(UUID id, InputDeliveryNote input) {
-        DeliveryNote deliveryNote = repository.findById(id).orElseThrow(() ->
-                new NotFoundException("Delivery note: not found ID."));
+        if (!input.hasData()) exceptionFactory.throwInvalidInput(className);
+
+        DeliveryNote deliveryNote = repository.findById(id).orElseThrow(() -> exceptionFactory.newNotFound(className));
 
         if (validate.isLocalDateTime(input.date()))
             deliveryNote.setDate(input.date());
