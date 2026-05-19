@@ -1,97 +1,166 @@
-# ¡Welcome to VitaVault! #
-![VitaVault_presentation.webp](assets/VitaVault_presentation.webp)
+# 🏥 VitaVault
 
-**Comprehensive Healthcare Data Management System**
+> Comprehensive Healthcare Information Management System
 
-## Overview
+[![Java](https://img.shields.io/badge/Java-22-orange?logo=java)](https://www.java.com)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![GraphQL](https://img.shields.io/badge/GraphQL-API-e10098?logo=graphql)](https://graphql.org)
+[![MySQL](https://img.shields.io/badge/MySQL-Database-blue?logo=mysql)](https://www.mysql.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**VitaVault** is a comprehensive information management system tailored specifically for healthcare institutions. It provides an efficient and unified solution for medical data management, care coordination, and process optimization within healthcare environments. Built around a robust GraphQL API, VitaVault ensures rapid, flexible, and precise data handling.
+![VitaVault Banner](./assets/VitaVault_presentation.webp)
 
-## Key Features
+**VitaVault** is a comprehensive information management system tailored for healthcare institutions. It provides a unified, efficient solution for medical data management, care coordination, and process optimization — built around a robust **GraphQL API** for flexible and precise data handling.
 
-- **Patient and Personal Data Management:**
+---
 
-  - Centralized handling of patient demographics and health records.
-  - Comprehensive patient identification and coverage plan integration.
+## 🚀 Tech Stack
 
-- **Appointment and Schedule Coordination:**
+| Layer | Technology |
+|---|---|
+| Language | Java |
+| Framework | Spring Boot 3 |
+| API Layer | GraphQL (Spring for GraphQL) |
+| Database | MySQL |
+| ORM | Spring Data JPA / Hibernate |
+| Utilities | Lombok |
+| Build Tool | Maven |
 
-  - Efficient scheduling and management of medical appointments.
-  - Real-time tracking of medical resource availability.
+---
 
-- **Hospital Resource Management:**
+## ✨ Key Features
 
-  - Detailed management of beds, rooms, and healthcare facilities.
-  - Real-time tracking of resource availability and status.
+- **Patient & Personal Data Management** — Centralized handling of patient demographics, health records, and coverage plan integration
+- **Appointment & Schedule Coordination** — Efficient scheduling with real-time tracking of medical resource availability
+- **Hospital Resource Management** — Detailed management of beds, rooms, and facilities with real-time status tracking
+- **Clinical Records & Episodes** — Detailed episode tracking, medical notes, and physician directives
+- **Billing & Healthcare Coverage** — Streamlined billing and insurance plan management with integrated financial tracking
+- **Role-Based Access Control** — Secure user roles to protect data integrity
 
-- **Clinical Records and Episodes:**
+---
 
-  - Detailed episode tracking and associated medical records.
-  - Integration of medical notes and physician directives.
-
-- **Billing and Healthcare Coverage:**
-
-  - Streamlined billing processes and insurance plan management.
-  - Integrated tracking of patient financial interactions and coverage details.
-
-- **User Roles and Access Management:**
-
-  - Role-based access control to enhance security and data integrity.
-
-## Technology Stack
-
-- **Backend:** Java with Spring Boot 3
-- **API Layer:** GraphQL (Spring for GraphQL)
-- **Database:** MySQL (via JPA/Hibernate)
-- **Utilities:** Lombok
-- **Build Tool:** Maven
-
-## Repository Structure
+## 📁 Project Structure
 
 ```
 vitavault/
 ├── assets/
 ├── src/
-│   ├── main/
-│   │   ├── java/com/vitavault/vitavault/
-│   │   │   ├── configuration/
-│   │   │   ├── controller/ (GraphQL controllers)
-│   │   │   ├── model/ (Domain entities and input objects)
-│   │   │   ├── repository/ (Data access repositories)
-│   │   │   ├── service/ (Business logic)
-│   │   │   └── util/ (Common utilities)
-│   │   └── resources/
-│   │       └── graphql/ (GraphQL schema definitions)
+│   └── main/
+│       ├── java/com/vitavault/vitavault/
+│       │   ├── configuration/       # App & security configuration
+│       │   ├── controller/          # GraphQL controllers
+│       │   ├── model/               # Domain entities & input objects
+│       │   ├── repository/          # Data access repositories
+│       │   ├── service/             # Business logic
+│       │   └── util/                # Common utilities
+│       └── resources/
+│           └── graphql/             # GraphQL schema definitions
 ├── pom.xml
 └── README.md
 ```
 
-## Use Cases & Real-World Applications
+---
 
-- **Unified Medical Record Systems:** Centralized storage for patient clinical history and demographics.
-- **Hospital Resource Management:** Real-time tracking of room and bed occupancy.
-- **Appointment Scheduling:** Efficient management of healthcare provider schedules and patient appointments.
-- **Integrated Billing Systems:** Simplified management of patient billing and healthcare coverage.
+## ⚙️ Getting Started
 
-## Getting Started
+### Prerequisites
 
-Clone the repository:
+- Java 17+
+- Maven 3.9+
+- MySQL 8+
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/NazaTarrili/VitaVault.git
+cd VitaVault
 ```
 
-Update `application.properties` with your MySQL credentials and run using Maven:
+### 2. Configure the database
+
+Update `src/main/resources/application.properties`:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/vitavault
+spring.datasource.username=YOUR_DB_USER
+spring.datasource.password=YOUR_DB_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+### 3. Run the application
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-## API Documentation
+---
 
-The GraphQL API schema is defined under `src/main/resources/graphql`. Access the GraphQL endpoint through the configured server URL after running the application.
+## 🔌 GraphQL API
+
+The GraphQL schema is defined in `src/main/resources/graphql/`. Once the app is running, access the interactive GraphQL playground at:
+
+```
+http://localhost:8080/graphiql
+```
+
+### Example Query
+
+```graphql
+query {
+  patients {
+    id
+    firstName
+    lastName
+    dateOfBirth
+    coveragePlan {
+      name
+    }
+  }
+}
+```
+
+### Example Mutation
+
+```graphql
+mutation {
+  createAppointment(input: {
+    patientId: "1"
+    doctorId: "3"
+    dateTime: "2025-06-15T10:30:00"
+  }) {
+    id
+    status
+  }
+}
+```
 
 ---
 
-VitaVault is designed for extensibility, making it suitable for hospitals, clinics, and healthcare institutions aiming for digital transformation and optimized care coordination.
+## 🏗️ Use Cases
 
+- **Unified Medical Record Systems** — Centralized storage for patient history and demographics
+- **Hospital Resource Management** — Real-time tracking of room and bed occupancy
+- **Appointment Scheduling** — Efficient management of provider schedules and patient bookings
+- **Integrated Billing Systems** — Simplified management of billing and healthcare coverage
+
+---
+
+## 🤝 Contributors
+
+- [@NazaTarrili](https://github.com/NazaTarrili)
+
+---
+
+## 👨‍💻 Author
+
+**Nazareno Leonel Tarrili Saavedra**
+
+- Portfolio: [nazatarrili.com](https://nazatarrili.com)
+- LinkedIn: [linkedin.com/in/nazareno-leonel-tarrili-saavedra](https://www.linkedin.com/in/nazareno-leonel-tarrili-saavedra/)
+- GitHub: [@NazaTarrili](https://github.com/NazaTarrili)
+
+---
+
+> VitaVault is designed for extensibility, making it suitable for hospitals, clinics, and healthcare institutions aiming for digital transformation and optimized care coordination.
