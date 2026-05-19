@@ -158,7 +158,7 @@ mutation {
 **Nazareno Leonel Tarrili Saavedra**
 
 - Portfolio: [nazatarrili.com](https://nazatarrili.com)
-- LinkedIn: [linkedin.com/in/nazareno-leonel-tarrili-saavedra](https://www.linkedin.com/in/nazareno-leonel-tarrili-saavedra/)
+- LinkedIn: [linkedin.com/in/nazareno-tarrili](https://www.linkedin.com/in/nazareno-tarrili)
 - GitHub: [@NazaTarrili](https://github.com/NazaTarrili)
 
 ---
